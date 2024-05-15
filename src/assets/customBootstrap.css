@@ -1,0 +1,39 @@
+.btn-primary {
+  background-color: #64bba8 !important;
+  border-color: #64bba8 !important;
+}
+
+.btn-primary:hover,
+.btn-primary:focus,
+.btn-primary:active {
+  background-color: #48877a !important;
+  border-color: #48877a !important;
+}
+
+.btn-secondary {
+  background-color: #f4fdfb !important;
+  border-color: #c2cac8 !important;
+  color: #48877a !important;
+}
+
+.btn-secondary:hover,
+.btn-secondary:focus,
+.btn-secondary:active {
+  background-color: #c2cac8 !important;
+  border-color: #919695 !important;
+  color: #48877a !important;
+}
+
+.card {
+  border-color: #e5e5e5 !important;
+}
+
+.nav-item {
+  background-color: #f4fdfb !important;
+  border-radius: 15% !important;
+  margin: 0 5px !important;
+}
+
+.nav-link {
+  color: #000 !important;
+}
