@@ -8,8 +8,8 @@
       <h3 class="fw-bold">100.00</h3>
     </div>
     <div class="d-flex justify-content-center mt-5">
-      <button class="btn btn-primary btn-lg m-1" style="width: 20%;" >Withdraw Money</button>
-      <button class="btn btn-primary btn-lg m-1" style="width: 20%;">Deposit Money</button>
+      <router-link to="/atm/withdraw" tag="button" class="btn btn-primary btn-lg m-1" style="width: 20%;" active-class="active">Withdraw Money</router-link>
+      <router-link to="/atm/deposit" tag="button" class="btn btn-primary btn-lg m-1" style="width: 20%;" active-class="active">Deposit Money</router-link>
     </div>
   </div>
 </template>
