@@ -1,1 +1,6 @@
 @import url('customBootstrap.css');
+
+.test {
+  border: 1px solid red;
+  background-color: #cccccc;
+}

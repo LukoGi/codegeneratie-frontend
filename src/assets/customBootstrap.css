@@ -31,6 +31,7 @@
 .nav-item {
   background-color: #f4fdfb !important;
   border-radius: 15% !important;
+  margin: 0 5px !important;
 }
 
 .nav-link {
