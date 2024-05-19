@@ -70,6 +70,33 @@ export const useAtmStore = defineStore("atmstore",{
             this.last_name = null;
 
             //axios.defaults.headers.common['Authorization'] = null;
-        }
+        },
+
+        withdraw(amount){
+            return new Promise((resolve, reject) => {
+                axios.post(`accounts/${this.account_id}/withdraw`, {
+                    amount: amount,
+                })
+                .then((res) => {
+                    this.balance = res.data.balance;
+                    resolve();
+                })
+                .catch((error) => reject(error))
+            });
+        },
+
+        deposit(amount){
+            return new Promise((resolve, reject) => {
+                axios.post(`accounts/${this.account_id}/deposit`, {
+                    amount: amount,
+                })
+                .then((res) => {
+                    this.balance = res.data.balance;
+                    resolve();
+                })
+                .catch((error) => reject(error))
+            });
+        },
+
     },
 });
