@@ -1,6 +1,6 @@
 @import url('customBootstrap.css');
 
-.test {
+.test { /* Add this to something to see how big it is in a clear way */
   border: 1px solid red;
   background-color: #cccccc;
 }
