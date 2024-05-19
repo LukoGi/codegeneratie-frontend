@@ -17,15 +17,18 @@
     </div>
     <div class="d-flex flex-column align-items-center mt-5">
       <input
-        min="1"
-        type="number"
-        class="form-control m-1"
-        style="width: 40%"
-        placeholder="Enter amount to deposit"
-      />
-      <button class="btn btn-primary btn-lg m-1" style="width: 40%">
+          min="1"
+          type="number"
+          class="form-control m-1"
+          style="width: 40%"
+          placeholder="Enter amount to withdraw"
+          v-model="amount"
+          @input="correctInput"
+        />
+      <button class="btn btn-primary btn-lg m-1" style="width: 40%" @click="deposit">
         Deposit
       </button>
+      <p class="text-danger" id="warningText"></p>
     </div>
   </div>
 </template>
@@ -46,12 +49,35 @@ export default {
 
     return { atmStore };
   },
+  data() {
+    return {
+      amount: null,
+    };
+  },
   methods: {
     logout() {
       this.atmStore.logout();
       this.$router.push('/atm/login');
-    }
-  }
+    },
+    deposit() {
+      if (this.validateInput()) {
+        this.atmStore.deposit(this.amount);
+      }
+    },
+    correctInput() {
+      if (this.amount < 1) {
+        this.amount = null;
+      }
+    },
+    validateInput() {
+      if (this.amount >= 1) {
+        return true;
+      } else {
+        document.getElementById('warningText').innerHTML = 'Please enter a valid amount';
+        return false;
+      }
+    },
+  },
 };
 </script>
 
