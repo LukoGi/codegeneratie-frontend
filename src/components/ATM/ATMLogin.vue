@@ -4,12 +4,12 @@
       <h1>Insert Card</h1>
 
       <div class="form-group mb-3">
-        <label for="cardname">Name on Card</label>
+        <label for="fullname">Name on Card</label>
         <input
           type="text"
           class="form-control"
-          id="cardname"
-          v-model="cardname"
+          id="fullname"
+          v-model="fullname"
           required
         />
         <small class="text-muted">Full name as displayed on card</small>
@@ -39,4 +39,34 @@
   </div>
 </template>
 
-<script></script>
+<script>
+import { useAtmStore } from '@/stores/atmstore'; 
+
+export default {
+  name: 'ATMLogin',
+  data() {
+    return {
+      fullname: '',
+      iban: '',
+      pin: '',
+    };
+  },
+  setup() {
+    const atmStore = useAtmStore();
+    atmStore.logout();
+    return { atmStore };
+  },
+  methods: {
+    login () {
+    this.atmStore
+      .login(this.fullname, this.iban, this.pin)
+      .then(() => {
+        this.$router.push('/atm/main-menu')
+      })
+      .catch((error) => {
+          this.errorMessage = error;
+      });
+    },
+  },
+};
+</script>
