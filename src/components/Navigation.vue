@@ -2,7 +2,7 @@
   <nav class="navbar navbar-expand-md mb-4">
     <div class="container-fluid d-flex justify-content-between">
       <div>
-        <a class="navbar-brand fw-bold" href="#" style="color: #48877a;">Bank Name</a>
+        <a class="navbar-brand fw-bold" href="/" style="color: #48877a;">Spring</a>
       </div>
 
       <ul class="navbar-nav mb-2 mb-md-0">
@@ -15,7 +15,7 @@
       </ul>
 
       <div>
-        <button class="btn btn-primary me-2">Login</button>
+        <router-link to="/login" tag="button" class="btn btn-primary me-2">Login</router-link>
         <button class="btn btn-secondary">Open Account</button>
       </div>
     </div>

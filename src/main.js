@@ -14,6 +14,6 @@ app.use(router)
 
 app.mount('#app')
 
-// if (localStorage.getItem('token')) {
-//     axios.defaults.headers.common['Authorization'] = "Bearer " + localStorage.getItem('token');
-// }
+ if (localStorage.getItem('token')) {
+     axios.defaults.headers.common['Authorization'] = "Bearer " + localStorage.getItem('token');
+ }

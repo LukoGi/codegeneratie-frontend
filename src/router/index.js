@@ -6,6 +6,8 @@ import ATMLogin from '../components/ATM/ATMLogin.vue';
 import ATMMainMenu from '../components/ATM/ATMMainMenu.vue';
 import ATMWithdraw from '../components/ATM/ATMWithdraw.vue';
 import ATMDeposit from '../components/ATM/ATMDeposit.vue';
+import Login from '../components/User/Login.vue';
+import UserMenu from '@/components/User/UserMenu.vue';
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -15,6 +17,8 @@ const router = createRouter({
     { path: '/atm/main-menu', component: ATMMainMenu },
     { path: '/atm/withdraw', component: ATMWithdraw },
     { path: '/atm/deposit', component: ATMDeposit },
+    { path: '/login', component: Login},
+    { path: '/usermenu', component: UserMenu},
   ]
 })
 
