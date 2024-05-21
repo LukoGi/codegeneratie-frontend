@@ -8,6 +8,7 @@ import ATMWithdraw from '../components/ATM/ATMWithdraw.vue';
 import ATMDeposit from '../components/ATM/ATMDeposit.vue';
 import Login from '../components/User/Login.vue';
 import UserMenu from '@/components/User/UserMenu.vue';
+import OpenAccount from '@/components/User/OpenAccount.vue';
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -19,6 +20,7 @@ const router = createRouter({
     { path: '/atm/deposit', component: ATMDeposit },
     { path: '/login', component: Login},
     { path: '/usermenu', component: UserMenu},
+    { path: '/openaccount', component: OpenAccount}
   ]
 })
 

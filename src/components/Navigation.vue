@@ -16,7 +16,8 @@
 
       <div>
         <router-link to="/login" tag="button" class="btn btn-primary me-2">Login</router-link>
-        <button class="btn btn-secondary">Open Account</button>
+        <router-link to="/openaccount" tag="button" class="btn btn-secondary me-2">Open Account</router-link>
+
       </div>
     </div>
   </nav>

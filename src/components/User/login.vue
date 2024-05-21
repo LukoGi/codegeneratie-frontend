@@ -1,4 +1,6 @@
 <template>
+  <div v-if="errorMessage" class="alert alert-danger">{{ errorMessage }}</div>
+  
   <div class="login-container d-flex justify-content-center align-items-center" style="height: 80vh;">
     <form class="p-3 card col-md-3" @submit.prevent="login">
       <h1>Login</h1>
@@ -16,7 +18,7 @@
       <div class="form-group mb-3">
         <label for="password">Password</label>
         <input
-            type="text"
+            type="password"
             class="form-control"
             id="password"
             v-model="password"
@@ -35,8 +37,10 @@ export default {
   data() {
     return {
       username: '',
-      password: ''
+      password: '',
+      errorMessage: '',
     }
+    
   },
   methods: {
     login() {
@@ -51,7 +55,9 @@ export default {
         
       })
       .catch(error => {
-        console.log(error);
+        console.log('Error:', error);
+        console.log('Error message:', error.response.data);
+         this.errorMessage = error.response.data;
       });
     }
   }
