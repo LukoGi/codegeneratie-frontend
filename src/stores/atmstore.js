@@ -34,23 +34,21 @@ export const useAtmStore = defineStore("atmstore",{
         login(fullname, iban, pincode) {
             return new Promise((resolve, reject) => {
                 axios.post("accounts/login", {
-                    fullName: fullname,
+                    fullname: fullname,
                     iban: iban,
                     pincode: pincode,
                 })
                 .then((res) => {
                     const data = res.data;
                     this.account_id = data.account_id;
-                    this.iban = data.iban;
                     this.balance = data.balance;
-                    this.account_type = data.account_type;
-                    this.is_active = data.is_active;
-                    this.absolute_limit = data.absolute_limit;
+                    //this.is_active = data.is_active;
+                    //this.absolute_limit = data.absolute_limit;
                     this.user_id = data.user.user_id;
                     this.first_name = data.user.first_name;
                     this.last_name = data.user.last_name;
 
-                    //axios.defaults.headers.common['Authorization'] = "Bearer " + res.data.token;
+                    axios.defaults.headers.common['Authorization'] = "Bearer " + res.data.token;
 
                     resolve();
                 })
@@ -69,7 +67,7 @@ export const useAtmStore = defineStore("atmstore",{
             this.first_name = null;
             this.last_name = null;
 
-            //axios.defaults.headers.common['Authorization'] = null;
+            axios.defaults.headers.common['Authorization'] = null;
         },
 
         withdraw(amount){
