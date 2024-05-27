@@ -44,7 +44,7 @@ export default {
   },
   methods: {
     login() {
-      axios.post('http://localhost:8080/login', {
+      axios.post('http://localhost:8080/users/login', {
         username: this.username,
         password: this.password
       })

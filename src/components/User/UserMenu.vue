@@ -22,7 +22,7 @@
       };
     },
     created() {
-      axios.get('http://localhost:8080/userinfo', {
+      axios.get('http://localhost:8080/users/userinfo', {
         headers: {
           Authorization: `Bearer ${localStorage.getItem('token')}`,
         },
