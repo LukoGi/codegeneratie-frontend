@@ -44,20 +44,39 @@ export default {
   },
   methods: {
     login() {
-      axios.post('http://localhost:8080/login', {
+      axios.post('http://localhost:8080/users/login', {
         username: this.username,
         password: this.password
       })
       .then(response => {
         console.log(response.data);
+        
         localStorage.setItem('token', response.data.token);
-        this.$router.push({ path: '/usermenu' });
+        this.getUserInfo();
         
       })
       .catch(error => {
         console.log('Error:', error);
         console.log('Error message:', error.response.data);
          this.errorMessage = error.response.data;
+      });
+    },
+    getUserInfo() {
+      const token = localStorage.getItem('token');
+      axios.get('http://localhost:8080/users/userinfo', {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      })
+      .then(response => {
+        if (response.data.is_approved) {
+          this.$router.push({ path: '/usermenu' });
+        } else {
+          this.$router.push({ path: '/notapproved' });
+        }
+      })
+      .catch(error => {
+        console.log('Error:', error);
       });
     }
   }
