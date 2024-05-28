@@ -15,18 +15,45 @@
         <li class="nav-item">
           <router-link to="/atm/login" class="nav-link" active-class="active">ATM</router-link>
         </li>
+        <li class="nav-item">
+          <router-link to="/usermenu" class="nav-link" active-class="active">User Menu</router-link>
+        </li>
       </ul>
 
       <div>
-        <router-link to="/login" tag="button" class="btn btn-primary me-2">Login</router-link>
-        <router-link to="/openaccount" tag="button" class="btn btn-secondary me-2">Open Account</router-link>
-
+        <router-link v-if="!isLoggedIn" to="/login" tag="button" class="btn btn-primary me-2">Login</router-link>
+        <button class="btn btn-secondary me-2" @click="logout">Logout</button>
+        <router-link v-if="!isLoggedIn" to="/openaccount" tag="button" class="btn btn-secondary me-2">Open Account</router-link>
       </div>
     </div>
   </nav>
 </template>
 
 <script>
+import router from '@/router';
+
+export default {
+  data() {
+    return {
+      isLoggedIn: !!localStorage.getItem('token'),
+    };
+  },
+  methods: {
+    logout() {
+      localStorage.removeItem('token');
+      this.isLoggedIn = false;
+      router.push({ path: '/login' });
+    }
+  },
+  created() {
+    this.isLoggedIn = !!localStorage.getItem('token');
+  },
+  watch: {
+    '$route': function() {
+      this.isLoggedIn = !!localStorage.getItem('token');
+    }
+  }
+}
 </script>
 
 <style>

@@ -22,6 +22,11 @@
       };
     },
     created() {
+      const token = localStorage.getItem('token');
+      if (!token) {
+        this.$router.push('/login');
+        return;
+    }
       axios.get('http://localhost:8080/users/userinfo', {
         headers: {
           Authorization: `Bearer ${localStorage.getItem('token')}`,
