@@ -1,4 +1,3 @@
-// src/stores/userstore.js
 import { defineStore } from 'pinia';
 
 export const useUserStore = defineStore('userstore', {

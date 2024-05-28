@@ -55,7 +55,7 @@ export default {
 
       try {
         const response = await axios.post('http://localhost:8080/transactions/createWithIban', transaction);
-        // Handle success (e.g. show message, clear form)
+        console.log(response.data);
       } catch (error) {
         // Handle error
       }

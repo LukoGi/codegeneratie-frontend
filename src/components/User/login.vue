@@ -56,6 +56,7 @@ export default {
 
         const userStore = useUserStore();
         userStore.setUserId(response.data.user_id);
+        console.log("User ID set in store:", userStore.getUserId);
 
         this.getUserInfo();
         
