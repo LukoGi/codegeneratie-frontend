@@ -2,12 +2,12 @@
   <div>
     <form @submit.prevent="submitForm">
       <div>
-        <label for="to_account_id">To Account ID:</label>
-        <input id="to_account_id" v-model="to_account_id" type="number" required>
+        <label for="to_account_iban">To Account IBAN:</label>
+        <input id="to_account_iban" v-model="to_account_iban" type="text" required>
       </div>
       <div>
-        <label for="from_account_id">From Account ID:</label>
-        <input id="from_account_id" v-model="from_account_id" type="number" required>
+        <label for="from_account_iban">From Account IBAN:</label>
+        <input id="from_account_iban" v-model="from_account_iban" type="text" required>
       </div>
       <div>
         <label for="transfer_amount">Transfer Amount:</label>
@@ -24,12 +24,21 @@
 
 <script>
 import axios from 'axios';
+import { useUserStore } from '@/stores/userstore';
 
 export default {
+  setup() {
+    const userStore = useUserStore(); // Get an instance of the store
+
+    return {
+      userStore,
+      // Other data properties and methods go here
+    };
+  },
   data() {
     return {
-      to_account_id: null,
-      from_account_id: null,
+      to_account_iban: '', // Changed to IBAN
+      from_account_iban: '', // Changed to IBAN
       transfer_amount: null,
       description: '',
     };
@@ -37,17 +46,18 @@ export default {
   methods: {
     async submitForm() {
       const transaction = {
-        to_account_id: this.to_account_id,
-        from_account_id: this.from_account_id,
+        to_account_iban: this.to_account_iban, // Changed to IBAN
+        from_account_iban: this.from_account_iban, // Changed to IBAN
+        initiator_user_id: this.userStore.getUserId,
         transfer_amount: this.transfer_amount,
         description: this.description,
       };
 
       try {
-        const response = await axios.post('http://localhost:8080/transactions', transaction);
-
+        const response = await axios.post('http://localhost:8080/transactions/createWithIban', transaction);
+        // Handle success (e.g. show message, clear form)
       } catch (error) {
-
+        // Handle error
       }
     },
   },
@@ -55,5 +65,5 @@ export default {
 </script>
 
 <style scoped>
-
+/* CSS styles go here */
 </style>
