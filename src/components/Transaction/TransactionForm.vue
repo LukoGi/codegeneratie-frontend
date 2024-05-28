@@ -6,10 +6,6 @@
         <input id="to_account_iban" v-model="to_account_iban" type="text" required>
       </div>
       <div>
-        <label for="from_account_iban">From Account IBAN:</label>
-        <input id="from_account_iban" v-model="from_account_iban" type="text" required>
-      </div>
-      <div>
         <label for="transfer_amount">Transfer Amount:</label>
         <input id="transfer_amount" v-model="transfer_amount" type="number" step="0.01" required>
       </div>
@@ -38,7 +34,6 @@ export default {
   data() {
     return {
       to_account_iban: '', // Changed to IBAN
-      from_account_iban: '', // Changed to IBAN
       transfer_amount: null,
       description: '',
     };
@@ -47,7 +42,6 @@ export default {
     async submitForm() {
       const transaction = {
         to_account_iban: this.to_account_iban, // Changed to IBAN
-        from_account_iban: this.from_account_iban, // Changed to IBAN
         initiator_user_id: this.userStore.getUserId,
         transfer_amount: this.transfer_amount,
         description: this.description,
