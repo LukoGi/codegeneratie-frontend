@@ -28,7 +28,7 @@
             <div class="card mb-4 shadow-sm">
               <div class="card-body">
                 <h5 class="card-title">Flexible Accounts</h5>
-                <p class="card-text">A variety of account types to suit different financial goals.</p>
+                <p class="card-text">A variety of account types (2)  to suit different financial goals.</p>
               </div>
             </div>
           </div>
