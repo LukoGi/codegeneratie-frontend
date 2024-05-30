@@ -11,6 +11,7 @@ import UserMenu from '@/components/User/UserMenu.vue';
 import OpenAccount from '@/components/User/OpenAccount.vue';
 import NotApproved from '@/components/User/NotApproved.vue';
 import AdminPanel from '@/components/User/AdminPanel.vue';
+import TransactionForm from '@/components/Transaction/TransactionForm.vue';
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -25,6 +26,7 @@ const router = createRouter({
     { path: '/openaccount', component: OpenAccount},
     { path: '/notapproved', component: NotApproved},
     { path: '/adminpanel', component: AdminPanel},
+    { path: '/transactions', component: TransactionForm}
   ]
 })
 

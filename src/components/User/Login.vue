@@ -32,6 +32,7 @@
 
 <script>
 import axios from "../../axios-auth";
+import { useUserStore } from '@/stores/userstore';
 
 export default {
   data() {
@@ -52,6 +53,11 @@ export default {
         console.log(response.data);
         
         localStorage.setItem('token', response.data.token);
+
+        const userStore = useUserStore();
+        userStore.setUserId(response.data.user_id);
+        console.log("User ID set in store:", userStore.getUserId);
+
         this.getUserInfo();
         
       })

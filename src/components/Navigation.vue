@@ -10,6 +10,9 @@
           <router-link to="/" class="nav-link" active-class="active">Home</router-link>
         </li>
         <li class="nav-item">
+          <router-link to="/transactions" class="nav-link" active-class="active">Transactions</router-link>
+        </li>
+        <li class="nav-item">
           <router-link to="/atm/login" class="nav-link" active-class="active">ATM</router-link>
         </li>
         <li class="nav-item">
