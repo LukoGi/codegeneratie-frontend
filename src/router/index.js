@@ -6,7 +6,7 @@ import ATMLogin from '../components/ATM/ATMLogin.vue';
 import ATMMainMenu from '../components/ATM/ATMMainMenu.vue';
 import ATMWithdraw from '../components/ATM/ATMWithdraw.vue';
 import ATMDeposit from '../components/ATM/ATMDeposit.vue';
-import Login from '../components/User/login.vue';
+import Login from '../components/User/Login.vue';
 import UserMenu from '@/components/User/UserMenu.vue';
 import OpenAccount from '@/components/User/OpenAccount.vue';
 import NotApproved from '@/components/User/NotApproved.vue';
