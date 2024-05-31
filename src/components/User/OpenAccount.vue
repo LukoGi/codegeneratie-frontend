@@ -54,6 +54,10 @@ export default {
                 email: '',
                 phone_number: '',
                 bsn_number: '',
+                is_archived: false,
+                is_approved: false,
+                roles: ['ROLE_USER'],
+                daily_transfer_limit: 1000,
             },
             errorMessage: '',
         };

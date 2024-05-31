@@ -9,8 +9,7 @@ import ATMDeposit from '../components/ATM/ATMDeposit.vue';
 import Login from '../components/User/Login.vue';
 import UserMenu from '@/components/User/UserMenu.vue';
 import OpenAccount from '@/components/User/OpenAccount.vue';
-import NotApproved from '@/components/User/NotApproved.vue';
-import AdminPanel from '@/components/User/AdminPanel.vue';
+import BankAccountCreation from '@/components/User/BankAccountCreation.vue';
 import TransactionForm from '@/components/Transaction/TransactionForm.vue';
 
 const router = createRouter({
@@ -24,8 +23,7 @@ const router = createRouter({
     { path: '/login', component: Login},
     { path: '/usermenu', component: UserMenu},
     { path: '/openaccount', component: OpenAccount},
-    { path: '/notapproved', component: NotApproved},
-    { path: '/adminpanel', component: AdminPanel},
+    { path: '/admin/bankaccountcreation', component: BankAccountCreation},
     { path: '/transactions', component: TransactionForm}
   ]
 })

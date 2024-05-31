@@ -75,10 +75,12 @@ export default {
         }
       })
       .then(response => {
-        if (response.data.is_approved) {
-          this.$router.push({ path: '/usermenu' });
+        localStorage.setItem('is_approved', response.data.is_approved);
+        localStorage.setItem('roles', JSON.stringify(response.data.roles));
+        if(response.data.roles.includes('ROLE_ADMIN')) {
+          this.$router.push('/admin/bankaccountcreation');
         } else {
-          this.$router.push({ path: '/notapproved' });
+          this.$router.push('/');
         }
       })
       .catch(error => {
