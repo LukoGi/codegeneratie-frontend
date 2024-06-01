@@ -15,7 +15,7 @@
             <p class="card-text"><strong>From:</strong> {{ transaction.initiatorName }}</p>
             <p class="card-text"><strong>To:</strong> {{ transaction.recipientName }}</p>
             <p class="card-text"><strong>Date:</strong> {{ formatDate(transaction.date) }}</p>
-            <p class="card-text"><strong>Description:</strong> {{ truncateDescription(transaction.description) }}</p>
+            <p class="card-text"><strong>Description:</strong> {{ moreDescription(transaction.description) }}</p>
             <button v-if="transaction.description.length > 100" @click="transaction.showFullDescription = !transaction.showFullDescription" class="btn btn-link p-0">{{ transaction.showFullDescription ? 'Show Less' : 'Read More' }}</button>
             <p v-if="transaction.showFullDescription">{{ transaction.description }}</p>
           </div>
@@ -58,12 +58,12 @@ export default {
     formatCurrency(amount) {
       return new Intl.NumberFormat('de-DE', { minimumFractionDigits: 2 }).format(amount);
     },
-  },
-  formatDate(date) {
-    return new Date(date).toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' });
-  },
-  truncateDescription(description) {
-    return description.length > 100 ? description.substring(0, 100) + '...' : description;
+    formatDate(date) {
+      return new Date(date).toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' });
+    },
+    moreDescription(description) {
+      return description.length > 100 ? description.substring(0, 100) + '...' : description;
+    },
   },
 };
 </script>
