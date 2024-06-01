@@ -31,6 +31,7 @@ const router = createRouter({
     { path: '/createtransactionsform', component: CreateTransactionsForm},
     { path: '/transactionshome', component: TransactionsHome},
     { path: '/transferfundsform', component: TransferFundsForm},
+    { path: '/transactionsView/:customerId', component: () => import('../components/Transaction/ViewTransactions.vue')},
   ]
 })
 
