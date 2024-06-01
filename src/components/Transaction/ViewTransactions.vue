@@ -3,25 +3,22 @@
     <h1 class="mb-3">Transactions for Customer ID: {{ customerId }} </h1>
 
     <div class="row justify-content-center">
-      <div class="col-md-5">
-        <div class="card p-3">
-          <ul class="list-group">
-            <li v-for="transaction in transactions" :key="transaction.transactionId" class="list-group-item">
-              <div class="row">
-                <div class="col-sm-6">
-                  <p><strong>Transfer amount:</strong> € {{ new Intl.NumberFormat('de-DE', { minimumFractionDigits: 2 }).format(transaction.transfer_amount) }}</p>
-                  <p><strong>From:</strong> {{ transaction.initiatorName }}</p>
-                  <p><strong>To:</strong> {{ transaction.recipientName }}</p>
-                </div>
-                <div class="col-sm-6">
-                  <p><strong>Date:</strong> {{ new Date(transaction.date).toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' }) }}</p>
-                  <p><strong>Description:</strong> {{ transaction.description.length > 100 ? transaction.description.substring(0, 100) + '...' : transaction.description }}</p>
-                  <button v-if="transaction.description.length > 100" @click="transaction.showFullDescription = !transaction.showFullDescription">{{ transaction.showFullDescription ? 'Show Less' : 'Read More' }}</button>
-                  <p v-if="transaction.showFullDescription">{{ transaction.description }}</p>
-                </div>
-              </div>
-            </li>
-          </ul>
+      <div class="col-md-5" v-for="transaction in transactions" :key="transaction.transactionId">
+        <div class="card mb-3">
+          <div class="card-header">
+            <p class="card-text"><strong>From Account:</strong> {{ transaction.from_account.iban }} ({{ transaction.from_account.account_type }})</p>
+          </div>
+          <div class="card-body">
+            <h5 class="card-title">Transfer amount: € {{ new Intl.NumberFormat('de-DE', { minimumFractionDigits: 2 }).format(transaction.transfer_amount) }}</h5>
+            <p class="card-text"><strong>To Account:</strong> {{ transaction.to_account.iban }} ({{ transaction.to_account.account_type }})</p>
+            <p class="card-text"><strong>To Account Balance:</strong> € {{ new Intl.NumberFormat('de-DE', { minimumFractionDigits: 2 }).format(transaction.to_account.balance) }}</p>
+            <p class="card-text"><strong>From:</strong> {{ transaction.initiatorName }}</p>
+            <p class="card-text"><strong>To:</strong> {{ transaction.recipientName }}</p>
+            <p class="card-text"><strong>Date:</strong> {{ new Date(transaction.date).toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' }) }}</p>
+            <p class="card-text"><strong>Description:</strong> {{ transaction.description.length > 100 ? transaction.description.substring(0, 100) + '...' : transaction.description }}</p>
+            <button v-if="transaction.description.length > 100" @click="transaction.showFullDescription = !transaction.showFullDescription" class="btn btn-link p-0">{{ transaction.showFullDescription ? 'Show Less' : 'Read More' }}</button>
+            <p v-if="transaction.showFullDescription">{{ transaction.description }}</p>
+          </div>
         </div>
       </div>
     </div>
@@ -30,9 +27,9 @@
 
 <script>
 import axios from "../../axios-auth";
-import { useUserStore } from '@/stores/userstore';
-import { ref, onMounted } from 'vue';
-import { useRoute } from 'vue-router';
+import {useUserStore} from '@/stores/userstore';
+import {ref, onMounted} from 'vue';
+import {useRoute} from 'vue-router';
 
 export default {
   setup() {
