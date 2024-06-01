@@ -22,6 +22,10 @@
         </div>
       </div>
     </div>
+    <div class="row justify-content-center">
+      <button @click="prevPage" :disabled="offset === 0" class="btn btn-primary btn-sm mr-2 custom-button">Previous</button>
+      <button @click="nextPage" :disabled="transactions.length < limit" class="btn btn-primary btn-sm custom-button">Next</button>
+    </div>
   </div>
 </template>
 
@@ -71,5 +75,8 @@ export default {
 <style scoped>
 .card {
   border-color: #e5e5e5 !important;
+}
+.custom-button {
+  width: 120px;
 }
 </style>
