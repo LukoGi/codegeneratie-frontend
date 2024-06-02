@@ -3,7 +3,7 @@
     <AdminSideNav />
 
     <div class="row mt-5">
-      <div class="col-md-6 offset-md-3">
+      <div class="col-md-6 offset-md-3 card">
         <h2 class="text-center mb-4">Set Limits</h2>
 
         <div class="form-group">
@@ -55,7 +55,7 @@
           />
         </div>
 
-        <div class="form-group">
+        <div class="form-group mb-3">
           <label for="absolute-limit">Absolute Limit</label>
           <input
             id="absolute-limit"
@@ -67,7 +67,7 @@
           />
         </div>
 
-        <button class="btn btn-primary btn-block" @click="submitLimits">
+        <button class="btn btn-primary btn-block mb-3" @click="submitLimits">
           Submit
         </button>
       </div>
@@ -96,29 +96,30 @@ export default {
   },
   watch: {
     selectedUser(newValue) {
-    if (newValue) {
-      const user = this.users.find(user => user.user_id === newValue);
-      if (user) {
-        this.dailyTransferLimit = user.daily_transfer_limit;
+      if (newValue) {
+        const user = this.users.find((user) => user.user_id === newValue);
+        if (user) {
+          this.dailyTransferLimit = user.daily_transfer_limit;
+        }
+      } else {
+        this.dailyTransferLimit = "";
       }
-
-    } else {
-      this.dailyTransferLimit = '';
-    }
-    this.absoluteLimit = '';
-    this.selectedBankAccount = ''; 
-  },
-  selectedBankAccount(newValue) {
-    if (newValue) {
-      const account = this.bankAccounts.find(account => account.account_id === newValue);
-      if (account) {
-        this.absoluteLimit = account.absolute_limit;
+      this.absoluteLimit = "";
+      this.selectedBankAccount = "";
+    },
+    selectedBankAccount(newValue) {
+      if (newValue) {
+        const account = this.bankAccounts.find(
+          (account) => account.account_id === newValue
+        );
+        if (account) {
+          this.absoluteLimit = account.absolute_limit;
+        }
+      } else {
+        this.absoluteLimit = "";
       }
-    } else {
-      this.absoluteLimit = '';
-    }
+    },
   },
-},
   methods: {
     async fetchUsers() {
       axios
@@ -149,12 +150,42 @@ export default {
         });
     },
     async submitLimits() {
-      await axios.put(`/api/users/${this.selectedUser}`, {
-        dailyTransferLimit: this.dailyTransferLimit,
-      });
-      await axios.put(`/api/accounts/${this.selectedBankAccount}`, {
-        absoluteLimit: this.absoluteLimit,
-      });
+      this.setDailyLimit();
+      this.setAbsoluteLimit();
+    },
+    setDailyLimit() {
+      axios
+        .put(
+          `users/${this.selectedUser}/setDailyLimit?dailyLimit=${this.dailyTransferLimit}`, null,
+          {
+            headers: {
+              Authorization: `Bearer ${this.token}`,
+            },
+          }
+        )
+        .then(() => {
+          console.log("Daily transfer limit set");
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    },
+    setAbsoluteLimit() {
+      axios
+        .put(
+          `accounts/${this.selectedBankAccount}/setAbsoluteLimit?absoluteLimit=${this.absoluteLimit}`, null,
+          {
+            headers: {
+              Authorization: `Bearer ${this.token}`,
+            },
+          }
+        )
+        .then(() => {
+          console.log("Absolute limit set");
+        })
+        .catch((error) => {
+          console.log(error);
+        });
     },
   },
   created() {
