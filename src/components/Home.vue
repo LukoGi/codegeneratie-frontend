@@ -90,6 +90,7 @@ export default {
 <style>
 .home {
   text-align: center;
+  margin-top: -1.5rem;
 }
 
 header {
