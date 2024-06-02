@@ -11,8 +11,6 @@ import UserMenu from '@/components/User/UserMenu.vue';
 import OpenAccount from '@/components/User/OpenAccount.vue';
 import BankAccountCreation from '@/components/User/BankAccountCreation.vue';
 import PendingUser from "@/components/User/PendingUser.vue";
-import NotApproved from '@/components/User/NotApproved.vue';
-import AdminPanel from '@/components/User/AdminPanel.vue';
 import MainDashboard from '@/components/AdminDashboard/MainDashboard.vue';
 import CreateTransactionsForm from '@/components/Transaction/CreateTransactionsForm.vue';
 import TransactionsHome from '@/components/Transaction/TransactionsHome.vue';
@@ -33,8 +31,6 @@ const router = createRouter({
     { path: '/openaccount', component: OpenAccount},
     { path: '/admin/bankaccountcreation', component: BankAccountCreation},
     { path: '/pendinguser', component: PendingUser},
-    { path: '/notapproved', component: NotApproved},
-    { path: '/adminpanel', component: AdminPanel},
     { path: '/dashboard', component: MainDashboard},
     { path: '/createtransactionsform', component: CreateTransactionsForm},
     { path: '/transactionshome', component: TransactionsHome},
