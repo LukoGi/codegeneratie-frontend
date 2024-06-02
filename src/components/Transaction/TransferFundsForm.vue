@@ -4,28 +4,28 @@
       <h1>Transfer Funds</h1>
 
       <div class="form-group mb-3">
-        <label for="from_account">Transfer From:</label>
-        <select class="form-control" id="from_account" v-model="from_account" required>
+        <label for="fromAccountType">Transfer From:</label>
+        <select class="form-control" id="fromAccountType" v-model="fromAccountType" required>
           <option value="checkings">Checkings Account</option>
           <option value="savings">Savings Account</option>
         </select>
       </div>
 
       <div class="form-group mb-3">
-        <label for="to_account">To:</label>
-        <select class="form-control" id="to_account" v-model="to_account" required>
+        <label for="toAccountType">To:</label>
+        <select class="form-control" id="toAccountType" v-model="toAccountType" required>
           <option value="checkings">Checkings Account</option>
           <option value="savings">Savings Account</option>
         </select>
       </div>
 
       <div class="form-group mb-3">
-        <label for="transfer_amount">Transfer Amount:</label>
+        <label for="transferAmount">Transfer Amount:</label>
         <input
             type="number"
             class="form-control"
-            id="transfer_amount"
-            v-model="transfer_amount"
+            id="transferAmount"
+            v-model="transferAmount"
             step="0.01"
             required
         />
@@ -51,18 +51,19 @@ export default {
   },
   data() {
     return {
-      from_account: '',
-      to_account: '',
-      transfer_amount: null,
+      fromAccountType: '',
+      toAccountType: '',
+      transferAmount: null,
       errorMessage: '',
     };
   },
   methods: {
     async submitForm() {
       const transaction = {
-        from_account: this.from_account,
-        to_account: this.to_account,
-        transfer_amount: this.transfer_amount,
+        userId: this.userStore.getUserId,
+        fromAccountType: this.fromAccountType,
+        toAccountType: this.toAccountType,
+        transferAmount: this.transferAmount,
       };
 
       try {
@@ -74,19 +75,19 @@ export default {
     },
   },
   created() {
-    watch(() => this.from_account, (newVal) => {
+    watch(() => this.fromAccountType, (newVal) => {
       if (newVal === 'checkings') {
-        this.to_account = 'savings';
+        this.toAccountType = 'savings';
       } else if (newVal === 'savings') {
-        this.to_account = 'checkings';
+        this.toAccountType = 'checkings';
       }
     });
 
-    watch(() => this.to_account, (newVal) => {
+    watch(() => this.toAccountType, (newVal) => {
       if (newVal === 'checkings') {
-        this.from_account = 'savings';
+        this.fromAccountType = 'savings';
       } else if (newVal === 'savings') {
-        this.from_account = 'checkings';
+        this.fromAccountType = 'checkings';
       }
     });
   },
