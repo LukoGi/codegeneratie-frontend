@@ -12,6 +12,9 @@ import OpenAccount from '@/components/User/OpenAccount.vue';
 import NotApproved from '@/components/User/NotApproved.vue';
 import AdminPanel from '@/components/User/AdminPanel.vue';
 import MainDashboard from '@/components/AdminDashboard/MainDashboard.vue';
+import CreateTransactionsForm from '@/components/Transaction/CreateTransactionsForm.vue';
+import TransactionsHome from '@/components/Transaction/TransactionsHome.vue';
+import TransferFundsForm from '@/components/Transaction/TransferFundsForm.vue';
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -27,6 +30,9 @@ const router = createRouter({
     { path: '/notapproved', component: NotApproved},
     { path: '/adminpanel', component: AdminPanel},
     { path: '/dashboard', component: MainDashboard},
+    { path: '/createtransactionsform', component: CreateTransactionsForm},
+    { path: '/transactionshome', component: TransactionsHome},
+    { path: '/transferfundsform', component: TransferFundsForm},
   ]
 })
 
