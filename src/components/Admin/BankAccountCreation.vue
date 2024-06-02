@@ -1,8 +1,8 @@
 <template>
-  <div class="Pending-User">
+  <div class="bank-account-creation">
     <AdminSideNav />
     <div class="container">
-      <h1 class="text-center mt-5">Users waiting to be approved</h1>
+      <h1 class="text-center mt-5">Users without any bank account</h1>
       <table class="table table-striped mt-3">
         <thead>
         <tr>
@@ -17,7 +17,7 @@
           <td>{{ user.username }}</td>
           <td>{{ user.first_name }}</td>
           <td>{{ user.last_name }}</td>
-          <td><button class="btn btn-primary" @click="approveUser(user.id)">Approve user</button></td>
+          <td><button class="btn btn-primary" @click="createAccount(user.id)">Create account</button></td>
         </tr>
         </tbody>
       </table>
@@ -26,7 +26,7 @@
 </template>
 
 <script>
-import AdminSideNav from '../AdminSideNav.vue';
+import AdminSideNav from './AdminSideNav.vue';
 import axios from "../../axios-auth";
 
 export default {
@@ -43,7 +43,7 @@ export default {
   },
   methods: {
     getUsers() {
-      axios.get('http://localhost:8080/users/getUnapprovedUsers')
+      axios.get('http://localhost:8080/users/getUsersWithoutBankAccount')
           .then(response => {
             this.users = response.data;
           })
@@ -51,13 +51,16 @@ export default {
             console.log(error);
           });
     },
+    createAccount(userId) {
+      this.$router.push('/addBankAccount/' + userId);
+    }
   }
 };
 
 </script>
 
 <style scoped>
-.Pending-User {
+.bank-account-creation {
   margin-left: 200px;
   padding: 20px;
 }
