@@ -9,7 +9,7 @@
     <p></p>
     <router-link to="/transferfundsform" tag="button" class="btn btn-primary">Transfer Between Accounts</router-link>
 
-    <router-link to="/viewtransactions" tag="button" class="btn btn-primary">View Transactions</router-link>
+    <router-link to="/transactionsView/1" tag="button" class="btn btn-primary">View Transactions</router-link>
   </div>
 </template>
 
