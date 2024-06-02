@@ -1,7 +1,7 @@
 import { createApp } from 'vue'
 import { createPinia } from 'pinia'
 import axios from 'axios'
-import Toast from 'vue-toastification'
+import Toast, { POSITION } from 'vue-toastification'
 import 'vue-toastification/dist/index.css'
 
 import App from './App.vue'
@@ -13,7 +13,10 @@ const app = createApp(App)
 
 app.use(createPinia())
 app.use(router)
-app.use(Toast)
+app.use(Toast, {
+    position: POSITION.TOP_RIGHT,
+});
+
 
 app.mount('#app')
 

@@ -78,10 +78,15 @@
 <script>
 import AdminSideNav from "./AdminSideNav.vue";
 import axios from "../../axios-auth";
+import useToast from "vue-toastification";
 
 export default {
   components: {
     AdminSideNav,
+  },
+  setup() {
+    const toast = useToast();
+    return { toast };
   },
   data() {
     return {
@@ -164,7 +169,7 @@ export default {
           }
         )
         .then(() => {
-          console.log("Daily transfer limit set");
+            this.$toast.success("Daily transfer limit set");
         })
         .catch((error) => {
           console.log(error);
@@ -181,7 +186,7 @@ export default {
           }
         )
         .then(() => {
-          console.log("Absolute limit set");
+          this.$toast.success("Absolute limit set");
         })
         .catch((error) => {
           console.log(error);
