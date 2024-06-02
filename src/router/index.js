@@ -11,7 +11,6 @@ import UserMenu from '@/components/User/UserMenu.vue';
 import OpenAccount from '@/components/User/OpenAccount.vue';
 import BankAccountCreation from '@/components/Admin/BankAccountCreation.vue';
 import PendingUser from "@/components/Admin/PendingUser.vue";
-import MainDashboard from '@/components/AdminDashboard/MainDashboard.vue';
 import CreateTransactionsForm from '@/components/Transaction/CreateTransactionsForm.vue';
 import TransactionsHome from '@/components/Transaction/TransactionsHome.vue';
 import TransferFundsForm from '@/components/Transaction/TransferFundsForm.vue';
@@ -31,7 +30,6 @@ const router = createRouter({
     { path: '/openaccount', component: OpenAccount},
     { path: '/admin/bankaccountcreation', component: BankAccountCreation},
     { path: '/pendinguser', component: PendingUser},
-    { path: '/dashboard', component: MainDashboard},
     { path: '/createtransactionsform', component: CreateTransactionsForm},
     { path: '/transactionshome', component: TransactionsHome},
     { path: '/transferfundsform', component: TransferFundsForm},
