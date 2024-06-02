@@ -19,7 +19,7 @@
 
       <div>
         <router-link v-if="!isLoggedIn" to="/login" tag="button" class="btn btn-primary me-2">Login</router-link>
-        <button class="btn btn-secondary me-2" @click="logout">Logout</button>
+        <button v-if="isLoggedIn" class="btn btn-secondary me-2" @click="logout">Logout</button>
         <router-link v-if="!isLoggedIn" to="/openaccount" tag="button" class="btn btn-secondary me-2">Open Account</router-link>
       </div>
     </div>
