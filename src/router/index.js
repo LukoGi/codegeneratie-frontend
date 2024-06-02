@@ -14,6 +14,8 @@ import AdminPanel from '@/components/User/AdminPanel.vue';
 import CreateTransactionsForm from '@/components/Transaction/CreateTransactionsForm.vue';
 import TransactionsHome from '@/components/Transaction/TransactionsHome.vue';
 import TransferFundsForm from '@/components/Transaction/TransferFundsForm.vue';
+import ViewTransactions from '../components/Transaction/ViewTransactions.vue';
+import AllTransactions from '../components/Transaction/AllTransactionsView.vue';
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -31,7 +33,8 @@ const router = createRouter({
     { path: '/createtransactionsform', component: CreateTransactionsForm},
     { path: '/transactionshome', component: TransactionsHome},
     { path: '/transferfundsform', component: TransferFundsForm},
-    { path: '/transactionsView/:customerId', component: () => import('../components/Transaction/ViewTransactions.vue')},
+    { path: '/transactionsView/:customerId', component: ViewTransactions },
+    { path: '/allTransactions', component: AllTransactions },
   ]
 })
 
