@@ -33,7 +33,6 @@
 <script>
 import axios from "../../axios-auth";
 import { useUserStore } from '@/stores/userstore';
-
 export default {
   data() {
     return {
@@ -56,10 +55,10 @@ export default {
 
         const userStore = useUserStore();
         userStore.setUserId(response.data.user_id);
+        userStore.setRoles(response.data.roles);
         console.log("User ID set in store:", userStore.getUserId);
 
         this.getUserInfo();
-        
       })
       .catch(error => {
         console.log('Error:', error);

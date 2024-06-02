@@ -10,8 +10,15 @@ import Login from '../components/User/Login.vue';
 import UserMenu from '@/components/User/UserMenu.vue';
 import OpenAccount from '@/components/User/OpenAccount.vue';
 import BankAccountCreation from '@/components/User/BankAccountCreation.vue';
-import TransactionForm from '@/components/Transaction/TransactionForm.vue';
 import PendingUser from "@/components/User/PendingUser.vue";
+import NotApproved from '@/components/User/NotApproved.vue';
+import AdminPanel from '@/components/User/AdminPanel.vue';
+import MainDashboard from '@/components/AdminDashboard/MainDashboard.vue';
+import CreateTransactionsForm from '@/components/Transaction/CreateTransactionsForm.vue';
+import TransactionsHome from '@/components/Transaction/TransactionsHome.vue';
+import TransferFundsForm from '@/components/Transaction/TransferFundsForm.vue';
+import ViewTransactions from '../components/Transaction/ViewTransactions.vue';
+import AllTransactions from '../components/Transaction/AllTransactionsView.vue';
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -25,8 +32,15 @@ const router = createRouter({
     { path: '/usermenu', component: UserMenu},
     { path: '/openaccount', component: OpenAccount},
     { path: '/admin/bankaccountcreation', component: BankAccountCreation},
-    { path: '/transactions', component: TransactionForm},
-    { path: '/pendinguser', component: PendingUser}
+    { path: '/pendinguser', component: PendingUser},
+    { path: '/notapproved', component: NotApproved},
+    { path: '/adminpanel', component: AdminPanel},
+    { path: '/dashboard', component: MainDashboard},
+    { path: '/createtransactionsform', component: CreateTransactionsForm},
+    { path: '/transactionshome', component: TransactionsHome},
+    { path: '/transferfundsform', component: TransferFundsForm},
+    { path: '/transactionsView/:customerId', component: ViewTransactions },
+    { path: '/allTransactions', component: AllTransactions },
   ]
 })
 
