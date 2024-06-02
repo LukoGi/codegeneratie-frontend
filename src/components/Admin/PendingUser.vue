@@ -19,7 +19,7 @@
           <td>{{ user.username }}</td>
           <td>{{ user.first_name }}</td>
           <td>{{ user.last_name }}</td>
-          <td><button class="btn btn-primary" @click="acceptUser(user.user_id)">Approve user</button></td>
+          <td><button class="btn btn-primary" @click="acceptUser(user)">Approve user</button></td>
         </tr>
         </tbody>
       </table>
@@ -53,15 +53,11 @@ export default {
             console.log(error);
           });
     },
-    acceptUser(userId) {
-      axios.post('http://localhost:8080/users/updateUser/' + userId)
-          .then(response => {
-            console.log(response.data);
-            this.getUsers();
-          })
-          .catch(error => {
-            console.log(error);
-          });
+    acceptUser(user) {
+      console.log(user);
+      this.$router.push({ path: `/admin/setlimits/${user.user_id}` });
+
+
   }
 }
 };
