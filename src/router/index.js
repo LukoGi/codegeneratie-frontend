@@ -9,6 +9,8 @@ import ATMDeposit from '../components/ATM/ATMDeposit.vue';
 import Login from '../components/User/Login.vue';
 import UserMenu from '@/components/User/UserMenu.vue';
 import OpenAccount from '@/components/User/OpenAccount.vue';
+import BankAccountCreation from '@/components/User/BankAccountCreation.vue';
+import PendingUser from "@/components/User/PendingUser.vue";
 import NotApproved from '@/components/User/NotApproved.vue';
 import AdminPanel from '@/components/User/AdminPanel.vue';
 import MainDashboard from '@/components/AdminDashboard/MainDashboard.vue';
@@ -29,6 +31,8 @@ const router = createRouter({
     { path: '/login', component: Login},
     { path: '/usermenu', component: UserMenu},
     { path: '/openaccount', component: OpenAccount},
+    { path: '/admin/bankaccountcreation', component: BankAccountCreation},
+    { path: '/pendinguser', component: PendingUser},
     { path: '/notapproved', component: NotApproved},
     { path: '/adminpanel', component: AdminPanel},
     { path: '/dashboard', component: MainDashboard},

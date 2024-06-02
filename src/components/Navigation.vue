@@ -9,13 +9,13 @@
         <li class="nav-item">
           <router-link to="/" class="nav-link" active-class="active">Home</router-link>
         </li>
-        <li class="nav-item">
+        <li class="nav-item" :class="{ 'disabled-link': !isApproved }">
           <router-link to="/transactionshome" class="nav-link" active-class="active">Transactions</router-link>
         </li>
         <li class="nav-item">
           <router-link to="/atm/login" class="nav-link" active-class="active">ATM</router-link>
         </li>
-        <li class="nav-item">
+        <li class="nav-item" :class="{ 'disabled-link': !isApproved }">
           <router-link to="/usermenu" class="nav-link" active-class="active">User Menu</router-link>
         </li>
       </ul>
@@ -36,21 +36,26 @@ export default {
   data() {
     return {
       isLoggedIn: !!localStorage.getItem('token'),
+      isApproved: localStorage.getItem('is_approved') === 'true',
     };
   },
   methods: {
     logout() {
       localStorage.removeItem('token');
+      localStorage.removeItem('is_approved');
       this.isLoggedIn = false;
+      this.isApproved = true;
       router.push({ path: '/login' });
     }
   },
   created() {
     this.isLoggedIn = !!localStorage.getItem('token');
+    this.isApproved = localStorage.getItem('is_approved') === 'true';
   },
   watch: {
     '$route': function() {
       this.isLoggedIn = !!localStorage.getItem('token');
+      this.isApproved = localStorage.getItem('is_approved') === 'true';
     }
   }
 }
@@ -59,5 +64,9 @@ export default {
 <style>
 .navbar {
   border-bottom: 1px solid #e5e5e5;
+}
+.disabled-link {
+  pointer-events: none;
+  opacity: 0.6;
 }
 </style>

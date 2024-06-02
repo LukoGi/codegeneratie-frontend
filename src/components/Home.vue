@@ -3,6 +3,10 @@
     <header class="text-white text-center py-5">
       <h1>Welcome to Spring Bank</h1>
       <p>Your favorite season of a bank</p>
+      <div v-if="isApproved">
+        <h1>Account Pending</h1>
+        <p>Your account has been created successfully and is currently awaiting approval. Once your account has been approved, you will get access to the other functions. Thank you for your patience.</p>
+      </div>
     </header>
     <section class="overview py-5">
       <div class="container">
@@ -72,6 +76,16 @@
     </footer>
   </div>
 </template>
+
+<script>
+export default {
+  computed: {
+    isApproved() {
+      return localStorage.getItem('is_approved') === 'false';
+    }
+  }
+}
+</script>
 
 <style>
 .home {
