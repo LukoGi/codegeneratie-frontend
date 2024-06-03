@@ -6,6 +6,7 @@
       <table class="table table-striped mt-3">
         <thead>
         <tr>
+          <th> Id</th>
           <th>Username</th>
           <th>First name</th>
           <th>Last name</th>
@@ -14,6 +15,7 @@
         </thead>
         <tbody>
         <tr v-for="user in users" :key="user.id">
+          <td> {{user.user_id}}</td>
           <td>{{ user.username }}</td>
           <td>{{ user.first_name }}</td>
           <td>{{ user.last_name }}</td>
