@@ -2,7 +2,7 @@
   <div class="sidenav">
     <router-link to="/pendinguser">Pending Users</router-link>
     <router-link to="/admin/bankaccountcreation">Create Bank accounts</router-link>
-    <router-link to="/admin/setlimits">Set Limits</router-link>
+    <router-link to="/admin/setlimitsdashboard">Set Limits</router-link>
 
   </div>
 </template>
