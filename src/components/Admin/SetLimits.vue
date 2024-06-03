@@ -1,6 +1,8 @@
 <template>
+
   <div class="SetLimits container">
     <AdminSideNav />
+    <div v-if="errorMessage" class="alert alert-danger">{{ errorMessage }}</div>
 
     <div class="row mt-5">
       <div class="col-md-6 offset-md-3 card">
@@ -78,15 +80,10 @@
 <script>
 import AdminSideNav from "./AdminSideNav.vue";
 import axios from "../../axios-auth";
-import useToast from "vue-toastification";
 
 export default {
   components: {
     AdminSideNav,
-  },
-  setup() {
-    const toast = useToast();
-    return { toast };
   },
   data() {
     return {
@@ -161,7 +158,8 @@ export default {
     setDailyLimit() {
       axios
         .put(
-          `users/${this.selectedUser}/setDailyLimit?dailyLimit=${this.dailyTransferLimit}`, null,
+          `users/${this.selectedUser}/setDailyLimit?dailyLimit=${this.dailyTransferLimit}`,
+          null,
           {
             headers: {
               Authorization: `Bearer ${this.token}`,
@@ -169,16 +167,19 @@ export default {
           }
         )
         .then(() => {
-            this.$toast.success("Daily transfer limit set");
+          
         })
         .catch((error) => {
-          console.log(error);
+          console.log("Error:", error);
+          console.log("Error message:", error.response.data);
+          this.errorMessage = error.response.data;
         });
     },
     setAbsoluteLimit() {
       axios
         .put(
-          `accounts/${this.selectedBankAccount}/setAbsoluteLimit?absoluteLimit=${this.absoluteLimit}`, null,
+          `accounts/${this.selectedBankAccount}/setAbsoluteLimit?absoluteLimit=${this.absoluteLimit}`,
+          null,
           {
             headers: {
               Authorization: `Bearer ${this.token}`,
@@ -186,10 +187,14 @@ export default {
           }
         )
         .then(() => {
-          this.$toast.success("Absolute limit set");
+          this.absoluteLimit = "";
+          this.dailyTransferLimit = "";
+          this.selectedBankAccount = "";
         })
         .catch((error) => {
-          console.log(error);
+          console.log("Error:", error);
+          console.log("Error message:", error.response.data);
+          this.errorMessage = error.response.data;
         });
     },
   },
