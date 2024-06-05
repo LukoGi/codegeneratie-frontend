@@ -1,5 +1,8 @@
 <template>
-  <div class="login-container d-flex justify-content-center align-items-center" style="height: 80vh;">
+  <div
+    class="login-container d-flex justify-content-center align-items-center"
+    style="height: 80vh"
+  >
     <form class="p-3 card col-md-3" @submit.prevent="login">
       <h1>Insert Card</h1>
 
@@ -40,15 +43,15 @@
 </template>
 
 <script>
-import { useAtmStore } from '@/stores/atmstore'; 
+import { useAtmStore } from "@/stores/atmstore";
 
 export default {
-  name: 'ATMLogin',
+  name: "ATMLogin",
   data() {
     return {
-      fullname: '',
-      iban: '',
-      pin: '',
+      fullname: "",
+      iban: "",
+      pin: "",
     };
   },
   setup() {
@@ -57,15 +60,13 @@ export default {
     return { atmStore };
   },
   methods: {
-    login () {
-    this.atmStore
-      .login(this.fullname, this.iban, this.pin)
-      .then(() => {
-        this.$router.push('/atm/main-menu')
-      })
-      .catch((error) => {
-          this.errorMessage = error;
-      });
+    async login() {
+      try {
+        await this.atmStore.login(this.fullname, this.iban, this.pin);
+        this.$router.push("/atm/main-menu");
+      } catch (error) {
+        this.errorMessage = error;
+      }
     },
   },
 };

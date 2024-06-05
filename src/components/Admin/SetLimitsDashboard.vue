@@ -1,5 +1,4 @@
 <template>
-
   <div class="SetLimits container">
     <AdminSideNav />
     <div v-if="errorMessage" class="alert alert-danger">{{ errorMessage }}</div>
@@ -124,40 +123,36 @@ export default {
   },
   methods: {
     async fetchUsers() {
-      axios
-        .get("users/all", {
+      try {
+        const response = await axios.get("users/all", {
           headers: {
             Authorization: `Bearer ${this.token}`,
           },
-        })
-        .then((response) => {
-          this.users = response.data;
-        })
-        .catch((error) => {
-          console.log(error);
         });
+        this.users = response.data;
+      } catch (error) {
+        console.log(error);
+      }
     },
     async fetchBankAccounts() {
-      axios
-        .get(`accounts/user/${this.selectedUser}`, {
+      try {
+        const response = await axios.get(`accounts/user/${this.selectedUser}`, {
           headers: {
             Authorization: `Bearer ${this.token}`,
           },
-        })
-        .then((response) => {
-          this.bankAccounts = response.data;
-        })
-        .catch((error) => {
-          console.log(error);
         });
+        this.bankAccounts = response.data;
+      } catch (error) {
+        console.log(error);
+      }
     },
     async submitLimits() {
-      this.setDailyLimit();
-      this.setAbsoluteLimit();
+      await this.setDailyLimit();
+      await this.setAbsoluteLimit();
     },
-    setDailyLimit() {
-      axios
-        .put(
+    async setDailyLimit() {
+      try {
+        await axios.put(
           `users/${this.selectedUser}/setDailyLimit?dailyLimit=${this.dailyTransferLimit}`,
           null,
           {
@@ -165,19 +160,19 @@ export default {
               Authorization: `Bearer ${this.token}`,
             },
           }
-        )
-        .then(() => {
-          
-        })
-        .catch((error) => {
-          console.log("Error:", error);
-          console.log("Error message:", error.response.data);
-          this.errorMessage = error.response.data;
-        });
+        );
+        this.$toast.success("Daily transfer limit set");
+        this.dailyTransferLimit = "";
+      } catch (error) {
+        console.log("Error:", error);
+        console.log("Error message:", error.response.data);
+        this.errorMessage = error.response.data;
+        this.$toast.error("Failed to set daily transfer limit");
+      }
     },
-    setAbsoluteLimit() {
-      axios
-        .put(
+    async setAbsoluteLimit() {
+      try {
+        await axios.put(
           `accounts/${this.selectedBankAccount}/setAbsoluteLimit?absoluteLimit=${this.absoluteLimit}`,
           null,
           {
@@ -185,17 +180,17 @@ export default {
               Authorization: `Bearer ${this.token}`,
             },
           }
-        )
-        .then(() => {
-          this.absoluteLimit = "";
-          this.dailyTransferLimit = "";
-          this.selectedBankAccount = "";
-        })
-        .catch((error) => {
-          console.log("Error:", error);
-          console.log("Error message:", error.response.data);
-          this.errorMessage = error.response.data;
-        });
+        );
+        this.$toast.success("Absolute limit set");
+        this.absoluteLimit = "";
+        this.dailyTransferLimit = "";
+        this.selectedBankAccount = "";
+      } catch (error) {
+        console.log("Error:", error);
+        console.log("Error message:", error.response.data);
+        this.errorMessage = error.response.data;
+        this.$toast.error("Failed to set absolute limit");
+      }
     },
   },
   created() {
