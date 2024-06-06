@@ -45,7 +45,7 @@ export default {
   },
   methods: {
     getUsers() {
-      axios.get('http://localhost:8080/users/getUnapprovedUsers')
+      axios.get('/users/getUnapprovedUsers')
           .then(response => {
             this.users = response.data;
           })
