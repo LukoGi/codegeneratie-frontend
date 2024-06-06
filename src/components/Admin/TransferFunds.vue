@@ -9,32 +9,32 @@
 
         <form @submit.prevent="submitForm">
           <div class="form-group mb-3">
-            <label for="from_account_iban">From Account IBAN:</label>
+            <label for="fromAccountIban">From Account IBAN:</label>
             <input
                 type="text"
                 class="form-control"
-                id="from_account_iban"
-                v-model="from_account_iban"
+                id="fromAccountIban"
+                v-model="fromAccountIban"
                 required
             />
           </div>
           <div class="form-group mb-3">
-            <label for="to_account_iban">To Account IBAN:</label>
+            <label for="toAccountIban">To Account IBAN:</label>
             <input
                 type="text"
                 class="form-control"
-                id="to_account_iban"
-                v-model="to_account_iban"
+                id="toAccountIban"
+                v-model="toAccountIban"
                 required
             />
           </div>
           <div class="form-group mb-3">
-            <label for="transfer_amount">Transfer Amount:</label>
+            <label for="transferAmount">Transfer Amount:</label>
             <input
                 type="number"
                 class="form-control"
-                id="transfer_amount"
-                v-model="transfer_amount"
+                id="transferAmount"
+                v-model="transferAmount"
                 step="0.01"
                 required
             />
@@ -72,9 +72,9 @@ export default {
   },
   data() {
     return {
-      from_account_iban: '',
-      to_account_iban: '',
-      transfer_amount: null,
+      fromAccountIban: '',
+      toAccountIban: '',
+      transferAmount: null,
       description: '',
       errorMessage: '',
     };
@@ -82,15 +82,15 @@ export default {
   methods: {
     async submitForm() {
       const transaction = {
-        from_account_iban: this.from_account_iban,
-        to_account_iban: this.to_account_iban,
-        initiator_user_id: this.userStore.getUserId,
-        transfer_amount: this.transfer_amount,
+        fromAccountIban: this.fromAccountIban,
+        toAccountIban: this.toAccountIban,
+        employeeId: this.userStore.getUserId,
+        transferAmount: this.transferAmount,
         description: this.description,
       };
 
       try {
-        await axios.post('/transactions/transferFunds', transaction);
+        await axios.post('/transactions/employeeTransfer', transaction);
         this.errorMessage = '';
       } catch (error) {
         this.errorMessage = error.response.data.message || 'An error occurred while submitting the form.';
