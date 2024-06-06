@@ -45,7 +45,7 @@ export default {
   },
   methods: {
     getUsers() {
-      axios.get('http://localhost:8080/users/getUsersWithoutBankAccount')
+      axios.get('/users/getUsersWithoutBankAccount')
           .then(response => {
             this.users = response.data;
           })
