@@ -37,7 +37,7 @@
 </template>
 
 <script>
-import axios from 'axios';
+import axios from "../../axios-auth";
 import { useUserStore } from '@/stores/userstore';
 import { watch } from 'vue';
 
