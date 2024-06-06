@@ -124,7 +124,7 @@ export default {
   methods: {
     async fetchUsers() {
       try {
-        const response = await axios.get("users/all", {
+        const response = await axios.get("users/", {
           headers: {
             Authorization: `Bearer ${this.token}`,
           },

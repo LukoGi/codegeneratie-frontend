@@ -24,7 +24,7 @@ export default {
 
     const fetchTransactions = async () => {
       try {
-        const response = await axios.get('/transactions/all', {
+        const response = await axios.get('/transactions/', {
           params: {
             date: null,
             minAmount: null,
