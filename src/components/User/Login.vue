@@ -68,7 +68,7 @@ export default {
     },
     getUserInfo() {
       const token = localStorage.getItem('token');
-      axios.get('http://localhost:8080/users/userinfo', {
+      axios.get('/users/userinfo', {
         headers: {
           Authorization: `Bearer ${token}`
         }
