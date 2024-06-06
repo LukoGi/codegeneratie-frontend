@@ -27,7 +27,7 @@
         this.$router.push('/login');
         return;
     }
-      axios.get('http://localhost:8080/users/userinfo', {
+      axios.get('/users/userinfo', {
         headers: {
           Authorization: `Bearer ${localStorage.getItem('token')}`,
         },

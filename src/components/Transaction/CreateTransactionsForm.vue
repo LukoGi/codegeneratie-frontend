@@ -68,7 +68,7 @@ export default {
       };
 
       try {
-        await axios.post('http://localhost:8080/transactions/createWithIban', transaction);
+        await axios.post('/transactions/createWithIban', transaction);
         this.errorMessage = '';
       } catch (error) {
         this.errorMessage = error.response.data.message || 'An error occurred while submitting the form.';

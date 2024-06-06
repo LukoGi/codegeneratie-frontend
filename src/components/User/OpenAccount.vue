@@ -64,7 +64,7 @@ export default {
     },
     methods: {
         submitForm() {
-            axios.post('http://localhost:8080/users/', this.user)
+            axios.post('/users/', this.user)
                 .then(response => {
                     console.log(response.data);
                     this.$router.push({ path: '/login' });
