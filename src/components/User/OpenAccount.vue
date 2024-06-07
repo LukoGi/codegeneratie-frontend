@@ -64,6 +64,15 @@ export default {
     },
     methods: {
         submitForm() {
+            if (!this.validatePhoneNumber(this.user.phone_number)) {
+              this.errorMessage = 'Invalid phone number';
+             return;
+            }
+            if(this.user.bsn_number.length !== 9) {
+              this.errorMessage = 'Invalid BSN number';
+              return;
+            }
+
             axios.post('/users/', this.user)
                 .then(response => {
                     console.log(response.data);
@@ -73,6 +82,10 @@ export default {
                     console.log(error);
                     this.errorMessage = error.response.data.message;
                 });
+        },
+        validatePhoneNumber(phoneNumber) {
+            const phoneRegex = /^\d{10,11}$/;
+            return phoneRegex.test(phoneNumber);
         },
     },
 };
