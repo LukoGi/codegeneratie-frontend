@@ -49,7 +49,7 @@ export default {
         absolute_transfer_limit: this.limits.absolute_transfer_limit,
       };
 
-      axios.put('http://localhost:8080/users/acceptUser/' + this.user_id, userUpdate)
+      axios.put('/users/acceptUser/' + this.user_id, userUpdate)
         .then(response => {
           console.log(response.data);
           this.$router.push({ path: '/admin/pendinguser' });

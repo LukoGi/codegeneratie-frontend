@@ -37,7 +37,7 @@
 </template>
 
 <script>
-import axios from 'axios';
+import axios from "../../axios-auth";
 import { useUserStore } from '@/stores/userstore';
 import { watch } from 'vue';
 
@@ -67,7 +67,7 @@ export default {
       };
 
       try {
-        await axios.post('http://localhost:8080/transactions/transfer', transaction);
+        await axios.post('/transactions/transfer', transaction);
         this.errorMessage = '';
       } catch (error) {
         this.errorMessage = error.response.data.message || 'An error occurred while submitting the form.';
