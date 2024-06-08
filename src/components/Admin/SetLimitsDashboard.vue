@@ -1,97 +1,56 @@
 <template>
   <div class="SetLimits container">
     <AdminSideNav />
-    <div v-if="errorMessage" class="alert alert-danger">{{ errorMessage }}</div>
+    <!-- <div v-if="errorMessage" class="alert alert-danger">{{ errorMessage }}</div> -->
+    <h1 class="text-center mt-5">Set Limits</h1>
+    <table class="table table-striped mt-3">
+      <thead>
+        <tr>
+          <th>Id</th>
+          <th>Username</th>
+          <th>First name</th>
+          <th>Last name</th>
+          <th>Set Limits</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr v-for="user in users" :key="user.id">
+          <td>{{ user.user_id }}</td>
+          <td>{{ user.username }}</td>
+          <td>{{ user.first_name }}</td>
+          <td>{{ user.last_name }}</td>
+          <td>
+            <button class="btn btn-primary" @click="showModal(user)">
+              Set Limits
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
 
-    <div class="row mt-5">
-      <div class="col-md-6 offset-md-3 card">
-        <h2 class="text-center mb-4">Set Limits</h2>
-
-        <div class="form-group">
-          <label for="user-select">User</label>
-          <select
-            id="user-select"
-            class="form-control"
-            v-model="selectedUser"
-            @change="fetchBankAccounts"
-          >
-            <option disabled value="">Please select a user</option>
-            <option
-              v-for="user in users"
-              :key="user.user_id"
-              :value="user.user_id"
-            >
-              {{ user.username }}
-            </option>
-          </select>
-        </div>
-
-        <div class="form-group">
-          <label for="account-select">Bank Account</label>
-          <select
-            id="account-select"
-            class="form-control"
-            v-model="selectedBankAccount"
-          >
-            <option disabled value="">Please select a bank account</option>
-            <option
-              v-for="account in bankAccounts"
-              :key="account.account_id"
-              :value="account.account_id"
-            >
-              {{ account.iban }}
-            </option>
-          </select>
-        </div>
-
-        <div class="form-group">
-          <label for="daily-limit">Daily Transfer Limit</label>
-          <input
-            id="daily-limit"
-            type="number"
-            class="form-control"
-            v-model="dailyTransferLimit"
-            placeholder="Daily Transfer Limit"
-            :disabled="!selectedUser"
-          />
-        </div>
-
-        <div class="form-group mb-3">
-          <label for="absolute-limit">Absolute Limit</label>
-          <input
-            id="absolute-limit"
-            type="number"
-            class="form-control"
-            v-model="absoluteLimit"
-            placeholder="Absolute Limit"
-            :disabled="!selectedBankAccount"
-          />
-        </div>
-
-        <button class="btn btn-primary btn-block mb-3" @click="submitLimits">
-          Submit
-        </button>
-      </div>
-    </div>
+    <SetLimitsModal
+      v-show="isModalVisible"
+      :selectedUser="selectedUser"
+      @close="closeModal"
+    />
   </div>
 </template>
 
 <script>
 import AdminSideNav from "./AdminSideNav.vue";
+import SetLimitsModal from "./SetLimitsModal.vue";
 import axios from "../../axios-auth";
 
 export default {
   components: {
     AdminSideNav,
+    SetLimitsModal,
   },
   data() {
     return {
+      isModalVisible: false,
       users: [],
       selectedUser: "",
-      bankAccounts: [],
-      selectedBankAccount: "",
-      dailyTransferLimit: "",
-      absoluteLimit: "",
       token: localStorage.getItem("token"),
     };
   },
@@ -107,6 +66,15 @@ export default {
       } catch (error) {
         console.log(error);
       }
+    },
+    showModal(user) {
+      this.selectedUser = user;
+      this.isModalVisible = true;
+    },
+    closeModal() {
+      this.isModalVisible = false;
+      this.fetchUsers();
+      selectedUser = "";
     },
   },
   created() {
