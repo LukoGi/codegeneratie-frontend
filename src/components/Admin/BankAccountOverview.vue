@@ -1,33 +1,34 @@
-
-
 <template>
-  <div>
+  <div class="all-transactions-view">
     <AdminSideNav />
-    <div class="bank-account-creation">
-      <h1>Bank account creation</h1>
-      <table class="table table-striped mt-3">
-        <thead>
-        <tr>
-          <th> Id</th>
-          <th>Username</th>
-          <th>First name</th>
-          <th>Last name</th>
-          <th>Create account</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr v-for="user in users" :key="user.id">
-          <td> {{user.user_id}}</td>
-          <td>{{ user.username }}</td>
-          <td>{{ user.first_name }}</td>
-          <td>{{ user.last_name }}</td>
-          <td><button class="btn btn-primary" @click="createAccount(user.id)">Create account</button></td>
-        </tr>
-        </tbody>
-      </table>
+    <div class="container">
+      <div class="card mt-3">
+      </div>
+      <div class="container">
+        <h1 class="mb-3">All Users</h1>
+        <table class="table">
+          <thead>
+          <tr>
+            <th>Username</th>
+            <th>First name</th>
+            <th>Last name</th>
+            <th>IBAN</th>
+            <th>Balance</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr v-for="account in users" :key="account.account_id">
+            <td>{{ account.user.username }}</td>
+            <td>{{ account.user.first_name }}</td>
+            <td>{{ account.user.last_name }}</td>
+            <td>{{ maskIban(account.iban) }}</td>
+            <td>{{ formatCurrency(account.balance) }}</td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
   </div>
-
 </template>
 
 <script>
@@ -41,29 +42,39 @@ export default {
   data() {
     return {
       users: [],
+      username: '',
     };
   },
   created() {
     this.getUsers();
   },
   methods: {
+    maskIban(iban) {
+      return iban.slice(-4).padStart(iban.length, '*');
+    },
+    formatCurrency(amount) {
+      return new Intl.NumberFormat('en-US', {
+        style: 'currency',
+        currency: 'USD'
+      }).format(amount);
+    },
     getUsers() {
-      axios.get('/users/getUsersWithoutBankAccount')
+      axios.get('/accounts/')
           .then(response => {
-            this.users = response.data;
+            this.users = response.data.users || response.data;
+            console.log (response)
           })
           .catch(error => {
             console.log(error);
           });
     },
-    createAccount(userId) {
-      this.$router.push('/addBankAccount/' + userId);
-    }
-  }
+  },
 };
-
 </script>
 
 <style scoped>
-
+.all-transactions-view {
+  margin-left: 200px;
+  padding: 20px;
+}
 </style>
