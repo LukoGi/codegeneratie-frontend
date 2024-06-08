@@ -15,10 +15,9 @@ import SetLimits from "@/components/Admin/SetLimits.vue";
 import CreateTransactionsForm from '@/components/Transaction/CreateTransactionsForm.vue';
 import TransactionsHome from '@/components/Transaction/TransactionsHome.vue';
 import TransferFundsForm from '@/components/Transaction/TransferFundsForm.vue';
-import ViewTransactions from '../components/Transaction/ViewTransactions.vue';
-import AllTransactions from '../components/Transaction/AllTransactionsView.vue';
+import ViewTransactions from '../components/Admin/ViewTransactions.vue';
+import AllTransactions from '../components/Admin/TransactionsOverview.vue';
 import SetLimitsDashboard from '../components/Admin/SetLimitsDashboard.vue';
-import TransferFunds from "@/components/Admin/TransferFunds.vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -36,11 +35,10 @@ const router = createRouter({
     { path: '/createtransactionsform', component: CreateTransactionsForm},
     { path: '/transactionshome', component: TransactionsHome},
     { path: '/transferfundsform', component: TransferFundsForm},
-    { path: '/transactionsView/:customerId', component: ViewTransactions },
-    { path: '/allTransactions', component: AllTransactions },
+    { path: '/admin/transactionoverview/:customerId', component: ViewTransactions },
+    { path: '/admin/transactionoverview', component: AllTransactions },
     { path: '/admin/setlimitsdashboard', component: SetLimitsDashboard },
     { path: '/admin/setlimits/:user_id', component: SetLimits},
-    { path: '/admin/transferfunds', component: TransferFunds},
   ]
 })
 
