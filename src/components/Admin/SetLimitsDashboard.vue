@@ -95,32 +95,6 @@ export default {
       token: localStorage.getItem("token"),
     };
   },
-  watch: {
-    selectedUser(newValue) {
-      if (newValue) {
-        const user = this.users.find((user) => user.user_id === newValue);
-        if (user) {
-          this.dailyTransferLimit = user.daily_transfer_limit;
-        }
-      } else {
-        this.dailyTransferLimit = "";
-      }
-      this.absoluteLimit = "";
-      this.selectedBankAccount = "";
-    },
-    selectedBankAccount(newValue) {
-      if (newValue) {
-        const account = this.bankAccounts.find(
-          (account) => account.account_id === newValue
-        );
-        if (account) {
-          this.absoluteLimit = account.absolute_limit;
-        }
-      } else {
-        this.absoluteLimit = "";
-      }
-    },
-  },
   methods: {
     async fetchUsers() {
       try {
@@ -132,64 +106,6 @@ export default {
         this.users = response.data;
       } catch (error) {
         console.log(error);
-      }
-    },
-    async fetchBankAccounts() {
-      try {
-        const response = await axios.get(`accounts/user/${this.selectedUser}`, {
-          headers: {
-            Authorization: `Bearer ${this.token}`,
-          },
-        });
-        this.bankAccounts = response.data;
-      } catch (error) {
-        console.log(error);
-      }
-    },
-    async submitLimits() {
-      await this.setDailyLimit();
-      await this.setAbsoluteLimit();
-    },
-    async setDailyLimit() {
-      try {
-        await axios.put(
-          `users/${this.selectedUser}/setDailyLimit?dailyLimit=${this.dailyTransferLimit}`,
-          null,
-          {
-            headers: {
-              Authorization: `Bearer ${this.token}`,
-            },
-          }
-        );
-        this.$toast.success("Daily transfer limit set");
-        this.dailyTransferLimit = "";
-      } catch (error) {
-        console.log("Error:", error);
-        console.log("Error message:", error.response.data);
-        this.errorMessage = error.response.data;
-        this.$toast.error("Failed to set daily transfer limit");
-      }
-    },
-    async setAbsoluteLimit() {
-      try {
-        await axios.put(
-          `accounts/${this.selectedBankAccount}/setAbsoluteLimit?absoluteLimit=${this.absoluteLimit}`,
-          null,
-          {
-            headers: {
-              Authorization: `Bearer ${this.token}`,
-            },
-          }
-        );
-        this.$toast.success("Absolute limit set");
-        this.absoluteLimit = "";
-        this.dailyTransferLimit = "";
-        this.selectedBankAccount = "";
-      } catch (error) {
-        console.log("Error:", error);
-        console.log("Error message:", error.response.data);
-        this.errorMessage = error.response.data;
-        this.$toast.error("Failed to set absolute limit");
       }
     },
   },
