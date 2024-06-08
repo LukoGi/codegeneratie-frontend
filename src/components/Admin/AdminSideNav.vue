@@ -1,9 +1,18 @@
 <template>
   <div class="sidenav">
+
+    <h3>Users</h3>
     <router-link to="/admin/pendinguser">Pending Users</router-link>
+    <br>
+
+    <h3>Bank Accounts</h3>
     <router-link to="/admin/bankaccountcreation">Create Bank accounts</router-link>
     <router-link to="/admin/setlimitsdashboard">Set Limits</router-link>
-    <router-link to="/admin/transferfunds">Transfer Funds</router-link>
+    <router-link to="/admin/bankoverview">Bank account overview</router-link>
+    <br>
+
+    <h3>Transactions</h3>
+    <router-link to="/admin/transactionoverview">Transaction overview</router-link>
 
   </div>
 </template>
@@ -35,5 +44,14 @@
 
 .sidenav a:hover {
   color: grey;
+}
+
+.sidenav h3 {
+  padding: 10px 16px;
+  color: #f1f1f1;
+  font-size: 20px;
+  font-weight: bold;
+  border-bottom: 1px solid #f1f1f1;
+  margin-bottom: 10px;
 }
 </style>
