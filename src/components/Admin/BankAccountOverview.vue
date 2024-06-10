@@ -14,6 +14,8 @@
             <th>Last name</th>
             <th>IBAN</th>
             <th>Balance</th>
+            <th>active</th>
+            <th>Action</th>
           </tr>
           </thead>
           <tbody>
@@ -23,6 +25,10 @@
             <td>{{ account.user.last_name }}</td>
             <td>{{ maskIban(account.iban) }}</td>
             <td>{{ formatCurrency(account.balance) }}</td>
+            <td>{{ account.is_active ? 'Active' : 'Not Active' }}</td>
+            <td>
+              <button class="btn btn-primary" @click="closeAccount(account.account_id)">Close Account</button>
+            </td>
           </tr>
           </tbody>
         </table>
@@ -65,6 +71,18 @@ export default {
             console.log (response)
           })
           .catch(error => {
+            console.log(error);
+          });
+    },
+    closeAccount(accountId) {
+      axios.put(`/accounts/${accountId}/closeAccount`)
+          .then(response => {
+            console.log(response.data);
+
+            this.users = this.users.filter(account => account.account_id !== accountId);
+          })
+          .catch(error => {
+            // handle error
             console.log(error);
           });
     },
