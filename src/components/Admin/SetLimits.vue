@@ -6,7 +6,7 @@
       <div v-if="errorMessage" class="alert alert-danger">{{ errorMessage }}</div>
 
       <div class="form-group mb-3">
-        <label for="absolute">Absolute Transfer Limit:</label>
+        <label for="absolute">Absolute Limit:</label>
         <input id="absolute" v-model="limits.absolute_transfer_limit" type="number" class="form-control" required>
       </div>
 
@@ -39,8 +39,12 @@ export default {
   },
   methods: {
     setLimits() {
-      if (this.limits.absolute_transfer_limit <= 0 || this.limits.daily_transfer_limit <= 0) {
-        this.errorMessage = 'Limits must be greater than zero';
+      if (this.limits.daily_transfer_limit <= 0) {
+        this.errorMessage = 'Daily transfer Limit must be greater than zero';
+        return;
+      } 
+      if (this.limits.absolute_transfer_limit >= 0) {
+        this.errorMessage = 'Absolute Limit must be less or equal to zero';
         return;
       }
       const userUpdate = {
