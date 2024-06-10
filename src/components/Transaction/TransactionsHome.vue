@@ -1,4 +1,5 @@
 <template>
+  <!-- voeg dit nog toe aan de user menu -->
   <div class="home">
     <header class="text-white text-center py-5">
       <h1>Transactions</h1>
@@ -19,14 +20,6 @@
               <div class="card-body">
                 <h5 class="card-title">Transfer Funds Between Accounts</h5>
                 <router-link to="/transferfundsform" class="btn btn-primary">Go</router-link>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-4">
-            <div class="card mb-4 shadow-sm">
-              <div class="card-body">
-                <h5 class="card-title">View Transaction History</h5>
-                <router-link to="/transactionsView/1" class="btn btn-primary">Go</router-link>
               </div>
             </div>
           </div>

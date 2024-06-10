@@ -9,7 +9,6 @@
         <table class="table">
           <thead>
           <tr>
-            <th>Username</th>
             <th>First name</th>
             <th>Last name</th>
             <th>IBAN</th>
@@ -20,7 +19,6 @@
           </thead>
           <tbody>
           <tr v-for="account in users" :key="account.account_id">
-            <td>{{ account.user.username }}</td>
             <td>{{ account.user.first_name }}</td>
             <td>{{ account.user.last_name }}</td>
             <td>{{ maskIban(account.iban) }}</td>
@@ -82,7 +80,6 @@ export default {
             this.users = this.users.filter(account => account.account_id !== accountId);
           })
           .catch(error => {
-            // handle error
             console.log(error);
           });
     },

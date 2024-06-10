@@ -75,7 +75,7 @@ export default {
   data() {
     return {
       userStore: useUserStore(),
-      customerId: null,
+      userId: null,
       transactions: [],
       startDate: '',
       endDate: '',
@@ -86,16 +86,13 @@ export default {
   },
   created() {
     const route = useRoute();
-    this.customerId = route.params.customerId;
+    this.userId = route.params.customerId;
     this.fetchTransactions();
   },
   methods: {
     async fetchTransactions() {
       try {
-        let url = `transactions/customer/${this.customerId}?offset=0&limit=10`;
-        if (this.userStore.getRoles.includes('ROLE_USER')) {
-          url = `transactions/customer/${this.userStore.getUserId}?offset=0&limit=10`;
-        }
+        let url = `transactions/users/${this.userId}`;
         if (this.startDate) url += `&startDate=${new Date(this.startDate).toISOString()}`;
         if (this.endDate) {
           const endDateInclusive = new Date(this.endDate);
