@@ -48,6 +48,9 @@
                 <div>IBAN: {{ account.iban }}</div>
                 <div class="balance">Balance: €{{ account.balance }}</div>
                 <div class="account_type"> Account type: {{account.account_type}}</div>
+                <div>
+                  <router-link :to="`/transactions/${account.account_id}`" class="btn btn-primary">View Transactions</router-link>
+                </div>
               </div>
             </li>
           </ul>
