@@ -44,6 +44,7 @@
           :disabled="!selectedBankAccount"
         />
       </div>
+      <div v-if="errorMessage" class="alert alert-danger">{{ errorMessage }}</div>
       <button class="btn btn-primary btn-block mb-3" @click="submitLimits">
         Submit
       </button>
@@ -64,6 +65,7 @@ export default {
       dailyTransferLimit: "",
       absoluteLimit: "",
       token: localStorage.getItem("token"),
+      errorMessage: "",
     };
   },
   watch: {
@@ -78,6 +80,7 @@ export default {
   },
   methods: {
     closeModal() {
+      this.errorMessage = "";
       this.$emit("close");
     },
     async fetchBankAccounts() {
@@ -98,12 +101,11 @@ export default {
     async submitLimits() {
       if (this.dailyTransferLimit !== "") {
         await this.setDailyLimit();
-      }
+      } 
       if (this.absoluteLimit !== "") {
         await this.setAbsoluteLimit();
-      }
-      await this.fetchBankAccounts();
-      this.closeModal();
+      } 
+      
     },
     async setDailyLimit() {
       try {
@@ -116,13 +118,12 @@ export default {
             },
           }
         );
+        await this.fetchBankAccounts();
+        this.closeModal();
       } catch (error) {
         console.log("Error:", error);
         if (error.response) {
-          console.log("Error message:", error.response.data);
-          this.errorMessage = error.response.data;
-        } else {
-          this.errorMessage = "Network error";
+          this.errorMessage = error.response.data.message;
         }
       }
     },
@@ -138,10 +139,10 @@ export default {
           }
         );
         this.selectedBankAccount = "";
+        await this.fetchBankAccounts();
+        this.closeModal();
       } catch (error) {
-        console.log("Error:", error);
-        console.log("Error message:", error.response.data);
-        this.errorMessage = error.response.data;
+        this.errorMessage = error.response.data.message;
       }
     },
   },
