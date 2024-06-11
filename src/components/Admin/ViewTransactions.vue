@@ -38,20 +38,24 @@
         <table class="table">
           <thead>
           <tr>
-            <th>Transaction ID</th>
+            <th>Date</th>
+            <th>Description</th>
             <th>From Account IBAN</th>
+            <th>Initiator Name</th>
+            <th>Recipient Name</th>
             <th>To Account IBAN</th>
             <th>Transfer Amount</th>
-            <th>Date</th>
           </tr>
           </thead>
           <tbody>
           <tr v-for="transaction in transactions" :key="transaction.id">
-            <td>{{ transaction.id }}</td>
-            <td>{{ transaction.from_account.iban }}</td>
+            <td>{{ transaction.date }}</td>
+            <td>{{ transaction.description }}</td>
+            <td>{{ transaction.initiator_user.username }}</td>
+            <td>{{ transaction.initiator_user.first_name }} {{ transaction.initiator_user.last_name }}</td>
+            <td>{{ transaction.to_account.user.first_name }} {{ transaction.to_account.user.last_name }}</td>
             <td>{{ transaction.to_account.iban }}</td>
             <td>{{ transaction.transfer_amount }}</td>
-            <td>{{ transaction.date }}</td>
           </tr>
           </tbody>
         </table>
@@ -82,6 +86,7 @@ export default {
       minAmount: '',
       maxAmount: '',
       iban: '',
+      token: localStorage.getItem('token'),
     };
   },
   created() {
@@ -103,12 +108,33 @@ export default {
         if (this.maxAmount) url += `&maxAmount=${this.maxAmount}`;
         if (this.iban) url += `&iban=${this.iban}`;
 
-        const response = await axios.get(url);
+        const response = await axios.get(url, {
+          headers: {
+            Authorization: `Bearer ${this.token}`,
+          },
+        });
         console.log('Response:', response);
-        this.transactions = response.data;
+        this.transactions = this.formatTransactions(response.data);
       } catch (error) {
         console.error('Error:', error);
       }
+    },
+
+    formatTransactions(transactions) {
+      transactions.forEach(transaction => {
+        const date = new Date(transaction.date);
+        const formattedDate = date.toLocaleDateString('en-US', {
+          year: 'numeric',
+          month: 'long',
+          day: 'numeric'
+        });
+        transaction.date = formattedDate;
+        transaction.transferAmount = (transaction.transferAmount * 1.1).toLocaleString('en-US', {
+          style: 'currency',
+          currency: 'EUR',
+        });
+      });
+      return transactions;
     },
   },
 };

@@ -37,22 +37,22 @@
       <table class="table table-striped mt-3">
         <thead>
         <tr>
-          <th>Recipient Name</th>
-          <th>From Account</th>
-          <th>Initiator Name</th>
-          <th>To Account</th>
-          <th>Transfer Amount</th>
           <th>Date</th>
+          <th>Description</th>
+          <th>Initiator Name</th>
+          <th>Recipient Name</th>
+          <th>To Account IBAN</th>
+          <th>Transfer Amount</th>
         </tr>
         </thead>
         <tbody>
-        <tr v-for="transaction in transactions" :key="transaction.fromAccountIban">
-          <td>{{ transaction.recipientName }}</td>
-          <td>{{ maskIban(transaction.fromAccountIban)}}</td>
-          <td>{{ transaction.initiatorName }}</td>
-          <td>{{ maskIban(transaction.toAccountIban) }}</td>
-          <td>{{ transaction.transferAmount }}</td>
+        <tr v-for="transaction in transactions" :key="transaction.id">
           <td>{{ transaction.date }}</td>
+          <td>{{ transaction.description }}</td>
+          <td>{{ transaction.initiator_user.first_name }} {{ transaction.initiator_user.last_name }}</td>
+          <td>{{ transaction.to_account.user.first_name }} {{ transaction.to_account.user.last_name }}</td>
+          <td>{{ maskIban(transaction.to_account.iban) }}</td>
+          <td>{{ amountFormatter(transaction.transfer_amount) }}</td>
         </tr>
         </tbody>
       </table>
@@ -76,6 +76,7 @@ export default {
       minAmount: '',
       maxAmount: '',
       iban: '',
+      token: localStorage.getItem('token'),
     };
   },
   created() {
@@ -84,6 +85,12 @@ export default {
   methods: {
     maskIban(iban) {
       return iban.slice(-4).padStart(iban.length, '*');
+    },
+    amountFormatter(amount) {
+      return new Intl.NumberFormat('en-US', {
+        style: 'currency',
+        currency: 'EUR',
+      }).format(amount);
     },
 
     formatTransactions(transactions) {
@@ -116,9 +123,13 @@ export default {
         if (this.maxAmount) url += `&maxAmount=${this.maxAmount}`;
         if (this.iban) url += `&iban=${this.iban}`;
 
-        const response = await axios.get(url);
+        const response = await axios.get(url, {
+          headers: {
+            Authorization: `Bearer ${this.token}`,
+          },
+        });
         console.log('Response:', response);
-        this.transactions = this.formatTransactions(response.data.content);
+        this.transactions = this.formatTransactions(response.data); // Changed from response.data.content to response.data
       } catch (error) {
         console.error('Error:', error);
       }
