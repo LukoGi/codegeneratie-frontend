@@ -62,7 +62,7 @@ export default {
             Authorization: `Bearer ${this.token}`,
           },
         });
-        this.users = response.data;
+        this.users = response.data.filter(user => user.roles.includes("ROLE_USER"));
       } catch (error) {
         console.log(error);
       }
