@@ -61,7 +61,10 @@ export default {
     },
     deposit() {
       if (this.validateInput()) {
-        this.atmStore.deposit(this.amount);
+        this.atmStore.deposit(this.amount)
+          .catch((error) => {
+            document.getElementById('warningText').innerHTML = error.response.data.message;
+          });
       }
     },
     correctInput() {

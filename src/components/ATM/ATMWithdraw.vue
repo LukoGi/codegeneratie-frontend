@@ -61,21 +61,20 @@ export default {
     },
     withdraw() {
       if (this.validateInput()) {
-        this.atmStore.withdraw(this.amount);
+        this.atmStore.withdraw(this.amount)
+          .catch((error) => {
+            document.getElementById('warningText').innerHTML = error.response.data.message;
+          });
+        
       }
     },
     correctInput() {
-      if (this.amount > this.atmStore.getBalance) {
-        this.amount = this.atmStore.getBalance;
-      } else if (this.amount < 1) {
+      if (this.amount < 1) {
         this.amount = null;
       }
     },
     validateInput() {
-      if (this.amount > this.atmStore.getBalance) {
-        document.getElementById('warningText').innerHTML = 'Insufficient funds';
-        return false;
-      } else if (this.amount > 0 && this.amount <= this.atmStore.getBalance) {
+      if (this.amount > 0) {
         return true;
       } else {
         document.getElementById('warningText').innerHTML = 'Please enter a valid amount';
