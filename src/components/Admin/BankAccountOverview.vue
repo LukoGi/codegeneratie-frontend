@@ -75,14 +75,16 @@ export default {
           });
     },
     closeAccount(accountId) {
-      axios.put(`/accounts/${accountId}/closeAccount`)
+      axios.put(`/accounts/${accountId}/closeAccount`, {}, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('token')}`
+        }
+      })
           .then(response => {
             console.log(response.data);
-
             this.users = this.users.filter(account => account.account_id !== accountId);
           })
           .catch(error => {
-
             console.log(error);
           });
     },

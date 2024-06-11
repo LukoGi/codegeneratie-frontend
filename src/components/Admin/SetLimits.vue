@@ -53,14 +53,18 @@ export default {
         absolute_transfer_limit: this.limits.absolute_transfer_limit,
       };
 
-      axios.put('/users/acceptUser/' + this.user_id, userUpdate)
-        .then(response => {
-          console.log(response.data);
-          this.$router.push({ path: '/admin/pendinguser' });
-        })
-        .catch(error => {
-          console.log(error);
-        });
+      axios.put('/users/acceptUser/' + this.user_id, userUpdate, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('token')}`
+        }
+      })
+          .then(response => {
+            console.log(response.data);
+            this.$router.push({ path: '/admin/pendinguser' });
+          })
+          .catch(error => {
+            console.log(error);
+          });
     },
   },
 };
