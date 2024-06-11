@@ -89,8 +89,8 @@ export default {
       return new Intl.NumberFormat('en-US', { style: 'currency', currency: 'EUR' }).format(value);
     },
     getTransactionHistory() {
-      let url = `/transactions/account/${this.accountId}`;
-      if (this.startDate) url += `?startDate=${new Date(this.startDate).toISOString()}`;
+      let url = `/transactions/account/${this.accountId}?offset=0&limit=100`;
+      if (this.startDate) url += `&startDate=${new Date(this.startDate).toISOString()}`;
       if (this.endDate) {
         const endDateInclusive = new Date(this.endDate);
         endDateInclusive.setHours(23, 59, 59, 999);
