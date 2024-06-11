@@ -69,6 +69,7 @@ export default {
       minAmount: '',
       maxAmount: '',
       iban: '',
+      token: localStorage.getItem('token'),
     };
   },
   setup() {
@@ -99,7 +100,13 @@ export default {
       if (this.maxAmount) url += `&maxAmount=${this.maxAmount}`;
       if (this.iban) url += `&iban=${this.iban}`;
 
-      axios.get(url)
+      const token = localStorage.getItem('token');
+
+      axios.get(url, {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      })
           .then(response => {
             this.transactions = response.data;
             console.log(response.data);
