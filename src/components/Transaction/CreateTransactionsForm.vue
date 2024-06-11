@@ -1,8 +1,25 @@
 <template>
   <div class="container d-flex justify-content-center align-items-center" style="height: 80vh;">
+
+    <section class="p-3 card col-md-6 mx-auto">
+    <div class="mt-3 input-group col-md-6">
+      <input v-model="usernameToSearch" type="text" class="form-control" placeholder="Enter username to find IBAN">
+      <div class="input-group-append">
+        <button @click="getIbanByUsername" class="btn btn-primary">Find IBAN</button>
+      </div>
+    </div>
+
+    <div v-if="accounts && accounts.length" class="mt-3 col-md-6">
+      <div v-for="account in accounts" :key="account.account_id" class="alert alert-info">
+        <p>Account Holder: {{ account.user.first_name }} {{ account.user.last_name }}</p>
+        <p>Account Type: {{ account.account_type }}</p>
+        <p>IBAN: {{ account.iban }}</p>
+      </div>
+    </div>
+  </section>
+
     <form class="p-3 card col-md-3" @submit.prevent="submitForm">
       <h1>Transaction</h1>
-
       <div class="form-group mb-3">
         <label for="to_account_iban">To Account IBAN:</label>
         <input
@@ -56,6 +73,9 @@ export default {
       transfer_amount: null,
       description: '',
       errorMessage: '',
+      cannotfind: '',
+      accounts: [],
+      usernameToSearch: '',
     };
   },
   methods: {
@@ -73,6 +93,25 @@ export default {
       } catch (error) {
         this.errorMessage = error.response.data.message || 'An error occurred while submitting the form.';
       }
+    },
+    getIbanByUsername() {
+      axios.get(`/accounts/username/${this.usernameToSearch}`, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('token')}`,
+        },
+      })
+          .then(response => {
+            if (response.data.length === 0) {
+              this.cannotFind = 'No accounts found for this username.';
+            } else {
+              this.accounts = response.data;
+              this.cannotFind = '';
+            }
+            console.log(response.data)
+          })
+          .catch(error => {
+            console.error(error);
+          });
     },
   },
 };
