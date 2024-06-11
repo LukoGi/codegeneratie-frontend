@@ -82,7 +82,7 @@ export default {
             this.users = this.users.filter(account => account.account_id !== accountId);
           })
           .catch(error => {
-            // handle error
+
             console.log(error);
           });
     },

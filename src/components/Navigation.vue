@@ -16,7 +16,7 @@
           <router-link to="/atm/login" class="nav-link" active-class="active">ATM</router-link>
         </li>
         <li class="nav-item" :class="{ 'disabled-link': !isApproved }">
-          <router-link to="/usermenu" class="nav-link" active-class="active">User Menu</router-link>
+          <router-link to="/usermenu" class="nav-link" active-class="active">User Info</router-link>
         </li>
       </ul>
 
