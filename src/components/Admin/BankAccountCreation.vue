@@ -45,7 +45,11 @@ export default {
   },
   methods: {
     getUsers() {
-      axios.get('/users/getUsersWithoutBankAccount')
+      axios.get('/users/getUsersWithoutBankAccount', {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('token')}`
+        }
+      })
           .then(response => {
             this.users = response.data;
           })
