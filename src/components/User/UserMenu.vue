@@ -20,6 +20,28 @@
         </div>
       </div>
     </div>
+    <div class="d-flex justify-content-center mt-3">
+      <div class="card p-3 col-md-8">
+        <div class="card-header">
+          <h2 class="text-center">Total Bank Accounts: {{ bankAccounts.length }}</h2>
+        </div>
+        <div class="card-body">
+          <h5 class="card-title">Bank Accounts:</h5>
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item" v-for="account in bankAccounts" :key="account.id">
+              <div class="d-flex justify-content-between">
+                <div>IBAN: {{ account.iban }}</div>
+                <div class="balance">Balance: €{{ account.balance }}</div>
+                <div class="account_type"> Account type: {{account.account_type}}</div>
+                <div>
+                  <router-link :to="`/transactions/${account.account_id}`" class="btn btn-primary">View Transactions</router-link>
+                </div>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
 </div>
 </template>
 
