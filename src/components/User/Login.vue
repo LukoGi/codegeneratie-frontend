@@ -56,6 +56,7 @@ export default {
         const userStore = useUserStore();
         userStore.setUserId(response.data.user_id);
         userStore.setRoles(response.data.roles);
+        userStore.setUsername(response.data.username);
         console.log("User ID set in store:", userStore.getUserId);
 
         this.getUserInfo();
@@ -76,8 +77,9 @@ export default {
       .then(response => {
         localStorage.setItem('is_approved', response.data.is_approved);
         localStorage.setItem('roles', JSON.stringify(response.data.roles));
+        localStorage.setItem('username', response.data.username);
         if(response.data.roles.includes('ROLE_ADMIN')) {
-          this.$router.push('/admin/bankaccountcreation');
+          this.$router.push('/admin');
         } else {
           this.$router.push('/');
         }

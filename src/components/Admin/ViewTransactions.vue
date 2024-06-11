@@ -38,20 +38,24 @@
         <table class="table">
           <thead>
           <tr>
-            <th>Transaction ID</th>
+            <th>Date</th>
+            <th>Description</th>
             <th>From Account IBAN</th>
+            <th>Initiator Name</th>
+            <th>Recipient Name</th>
             <th>To Account IBAN</th>
             <th>Transfer Amount</th>
-            <th>Date</th>
           </tr>
           </thead>
           <tbody>
           <tr v-for="transaction in transactions" :key="transaction.id">
-            <td>{{ transaction.id }}</td>
-            <td>{{ transaction.from_account.iban }}</td>
+            <td>{{ transaction.date }}</td>
+            <td>{{ transaction.description }}</td>
+            <td>{{ transaction.initiator_user.username }}</td>
+            <td>{{ transaction.initiator_user.first_name }} {{ transaction.initiator_user.last_name }}</td>
+            <td>{{ transaction.to_account.user.first_name }} {{ transaction.to_account.user.last_name }}</td>
             <td>{{ transaction.to_account.iban }}</td>
             <td>{{ transaction.transfer_amount }}</td>
-            <td>{{ transaction.date }}</td>
           </tr>
           </tbody>
         </table>
@@ -75,27 +79,25 @@ export default {
   data() {
     return {
       userStore: useUserStore(),
-      customerId: null,
+      userId: null,
       transactions: [],
       startDate: '',
       endDate: '',
       minAmount: '',
       maxAmount: '',
       iban: '',
+      token: localStorage.getItem('token'),
     };
   },
   created() {
     const route = useRoute();
-    this.customerId = route.params.customerId;
+    this.userId = route.params.customerId;
     this.fetchTransactions();
   },
   methods: {
     async fetchTransactions() {
       try {
-        let url = `transactions/customer/${this.customerId}?offset=0&limit=10`;
-        if (this.userStore.getRoles.includes('ROLE_USER')) {
-          url = `transactions/customer/${this.userStore.getUserId}?offset=0&limit=10`;
-        }
+        let url = `transactions/users/${this.userId}`;
         if (this.startDate) url += `&startDate=${new Date(this.startDate).toISOString()}`;
         if (this.endDate) {
           const endDateInclusive = new Date(this.endDate);
@@ -106,12 +108,33 @@ export default {
         if (this.maxAmount) url += `&maxAmount=${this.maxAmount}`;
         if (this.iban) url += `&iban=${this.iban}`;
 
-        const response = await axios.get(url);
+        const response = await axios.get(url, {
+          headers: {
+            Authorization: `Bearer ${this.token}`,
+          },
+        });
         console.log('Response:', response);
-        this.transactions = response.data;
+        this.transactions = this.formatTransactions(response.data);
       } catch (error) {
         console.error('Error:', error);
       }
+    },
+
+    formatTransactions(transactions) {
+      transactions.forEach(transaction => {
+        const date = new Date(transaction.date);
+        const formattedDate = date.toLocaleDateString('en-US', {
+          year: 'numeric',
+          month: 'long',
+          day: 'numeric'
+        });
+        transaction.date = formattedDate;
+        transaction.transferAmount = (transaction.transferAmount * 1.1).toLocaleString('en-US', {
+          style: 'currency',
+          currency: 'EUR',
+        });
+      });
+      return transactions;
     },
   },
 };

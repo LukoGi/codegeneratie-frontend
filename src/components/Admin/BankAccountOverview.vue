@@ -9,23 +9,26 @@
         <table class="table">
           <thead>
           <tr>
-            <th>Username</th>
             <th>First name</th>
             <th>Last name</th>
             <th>IBAN</th>
             <th>Balance</th>
             <th>active</th>
+            <th>View Users Transaction</th>
             <th>Action</th>
+
           </tr>
           </thead>
           <tbody>
           <tr v-for="account in users" :key="account.account_id">
-            <td>{{ account.user.username }}</td>
             <td>{{ account.user.first_name }}</td>
             <td>{{ account.user.last_name }}</td>
             <td>{{ maskIban(account.iban) }}</td>
             <td>{{ formatCurrency(account.balance) }}</td>
             <td>{{ account.is_active ? 'Active' : 'Not Active' }}</td>
+            <td>
+              <router-link :to="`/admin/transactionoverview/${account.account_id}`" class="btn btn-primary">View Transactions</router-link>
+            </td>
             <td>
               <button class="btn btn-primary" @click="closeAccount(account.account_id)">Close Account</button>
             </td>
@@ -49,6 +52,7 @@ export default {
     return {
       users: [],
       username: '',
+      token: localStorage.getItem('token'),
     };
   },
   created() {
@@ -65,7 +69,11 @@ export default {
       }).format(amount);
     },
     getUsers() {
-      axios.get('/accounts/')
+      axios.get('/accounts/', {
+        headers: {
+          Authorization: `Bearer ${this.token}`,
+        },
+      })
           .then(response => {
             this.users = response.data.users || response.data;
             console.log (response)
@@ -82,7 +90,6 @@ export default {
             this.users = this.users.filter(account => account.account_id !== accountId);
           })
           .catch(error => {
-
             console.log(error);
           });
     },

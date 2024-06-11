@@ -14,11 +14,13 @@ import PendingUser from "@/components/Admin/PendingUser.vue";
 import SetLimits from "@/components/Admin/SetLimits.vue";
 import CreateTransactionsForm from '@/components/Transaction/CreateTransactionsForm.vue';
 import TransactionsHome from '@/components/Transaction/TransactionsHome.vue';
+import TransActionHistoryOverview from "@/components/User/TransActionHistoryOverview.vue";
 import TransferFundsForm from '@/components/Transaction/TransferFundsForm.vue';
 import ViewTransactions from '../components/Admin/ViewTransactions.vue';
 import AllTransactions from '../components/Admin/TransactionsOverview.vue';
 import SetLimitsDashboard from '../components/Admin/SetLimitsDashboard.vue';
 import BankOverview from '../components/Admin/BankAccountOverview.vue';
+import AdminSideNav from "@/components/Admin/AdminSideNav.vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -35,12 +37,14 @@ const router = createRouter({
     { path: '/admin/pendinguser', component: PendingUser},
     { path: '/createtransactionsform', component: CreateTransactionsForm},
     { path: '/transactionshome', component: TransactionsHome},
+    { path: '/transactions/:id', component: TransActionHistoryOverview},
     { path: '/transferfundsform', component: TransferFundsForm},
     { path: '/admin/transactionoverview/:customerId', component: ViewTransactions },
     { path: '/admin/transactionoverview', component: AllTransactions },
     { path: '/admin/setlimitsdashboard', component: SetLimitsDashboard },
     { path: '/admin/setlimits/:user_id', component: SetLimits},
     { path: '/admin/bankoverview', component: BankOverview},
+    { path: '/admin', component: AdminSideNav}
   ]
 })
 

@@ -18,7 +18,19 @@
 </template>
 
 <script>
+import { useUserStore } from '@/stores/userstore.js';
+import { useRouter } from 'vue-router';
 
+export default {
+  setup() {
+    const userStore = useUserStore();
+    const router = useRouter();
+
+    if (!userStore.getRoles.includes('ROLE_ADMIN')) {
+      router.push('/');
+    }
+  },
+};
 </script>
 
 <style>
