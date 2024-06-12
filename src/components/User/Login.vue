@@ -31,7 +31,6 @@
       <button class="btn btn-primary" type="submit">Login</button>
     </form>
   </div>
-import { l } from "vite/dist/node/types.d-aGj9QkWt";
 </template>
 
 <script>
