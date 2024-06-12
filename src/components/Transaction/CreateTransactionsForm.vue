@@ -1,4 +1,5 @@
 <template>
+  <div v-if="errorMessage" class="alert alert-danger">{{ errorMessage }}</div>
   <div class="container d-flex justify-content-center align-items-center" style="height: 80vh;">
 
     <section class="p-3 card col-md-6 mx-auto">
@@ -17,36 +18,35 @@
       </div>
     </div>
   </section>
-
     <form class="p-3 card col-md-3" @submit.prevent="submitForm">
       <h1>Transaction</h1>
       <div class="form-group mb-3">
         <label for="to_account_iban">To Account IBAN:</label>
         <input
-            type="text"
-            class="form-control"
-            id="to_account_iban"
-            v-model="to_account_iban"
-            required
+          type="text"
+          class="form-control"
+          id="to_account_iban"
+          v-model="to_account_iban"
+          required
         />
       </div>
       <div class="form-group mb-3">
         <label for="transfer_amount">Transfer Amount:</label>
         <input
-            type="number"
-            class="form-control"
-            id="transfer_amount"
-            v-model="transfer_amount"
-            step="0.01"
-            required
+          type="number"
+          class="form-control"
+          id="transfer_amount"
+          v-model="transfer_amount"
+          step="0.01"
+          required
         />
       </div>
       <div class="form-group mb-3">
         <label for="description">Description:</label>
         <textarea
-            class="form-control"
-            id="description"
-            v-model="description"
+          class="form-control"
+          id="description"
+          v-model="description"
         ></textarea>
       </div>
       <button class="btn btn-primary" type="submit">Submit</button>
@@ -56,7 +56,7 @@
 
 <script>
 import axios from "../../axios-auth";
-import { useUserStore } from '@/stores/userstore';
+import { useUserStore } from "@/stores/userstore";
 
 export default {
   setup() {
@@ -64,18 +64,18 @@ export default {
 
     return {
       userStore,
-
     };
   },
   data() {
     return {
-      to_account_iban: '',
+      to_account_iban: "",
       transfer_amount: null,
       description: '',
       errorMessage: '',
       cannotfind: '',
       accounts: [],
       usernameToSearch: '',
+      token: localStorage.getItem("token"),
     };
   },
   methods: {
@@ -87,17 +87,24 @@ export default {
         description: this.description,
       };
 
-      try {
-        await axios.post('/transactions/createWithIban', transaction);
-        this.errorMessage = '';
+      try {  
+        await axios.post("/transactions/createWithIban", transaction, {
+          headers: {
+            Authorization: `Bearer ${this.token}`,
+          },
+        });
+        this.errorMessage = "";
+        this.$router.push({ path: "/transactionshome" });
       } catch (error) {
-        this.errorMessage = error.response.data.message || 'An error occurred while submitting the form.';
+        this.errorMessage =
+          error.response.data.message ||
+          "An error occurred while submitting the form.";
       }
     },
     getIbanByUsername() {
       axios.get(`/accounts/username/${this.usernameToSearch}`, {
         headers: {
-          Authorization: `Bearer ${localStorage.getItem('token')}`,
+          Authorization: `Bearer ${this.token}`,
         },
       })
           .then(response => {
@@ -117,6 +124,4 @@ export default {
 };
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>

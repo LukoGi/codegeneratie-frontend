@@ -77,6 +77,7 @@ export default {
       transferAmount: null,
       description: '',
       errorMessage: '',
+      token: localStorage.getItem('token'),
     };
   },
   methods: {
@@ -90,8 +91,13 @@ export default {
       };
 
       try {
-        await axios.post('/transactions/employeeTransfer', transaction);
+        await axios.post('/transactions/employeeTransfer', transaction, {
+        headers: {
+          Authorization: `Bearer ${this.token}`,
+        },
+      });
         this.errorMessage = '';
+
       } catch (error) {
         this.errorMessage = error.response.data.message || 'An error occurred while submitting the form.';
       }
