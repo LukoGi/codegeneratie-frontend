@@ -90,15 +90,20 @@ export default {
     },
     getTransactionHistory() {
       let url = `/transactions/account/${this.accountId}`;
-      if (this.startDate) url += `?startDate=${new Date(this.startDate).toISOString()}`;
+      let params = [];
+      if (this.startDate) params.push(`startDate=${new Date(this.startDate).toISOString()}`);
       if (this.endDate) {
         const endDateInclusive = new Date(this.endDate);
         endDateInclusive.setHours(23, 59, 59, 999);
-        url += `&endDate=${endDateInclusive.toISOString()}`;
+        params.push(`endDate=${endDateInclusive.toISOString()}`);
       }
-      if (this.minAmount) url += `&minAmount=${this.minAmount}`;
-      if (this.maxAmount) url += `&maxAmount=${this.maxAmount}`;
-      if (this.iban) url += `&iban=${this.iban}`;
+      if (this.minAmount) params.push(`minAmount=${this.minAmount}`);
+      if (this.maxAmount) params.push(`maxAmount=${this.maxAmount}`);
+      if (this.iban) params.push(`iban=${this.iban}`);
+
+      params.push(`offset=0&limit=10`);
+
+      url += '?' + params.join('&');
 
       const token = localStorage.getItem('token');
 

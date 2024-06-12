@@ -1,5 +1,6 @@
 <template>
-  <div class="container d-flex justify-content-center align-items-center" style="height: 80vh;">
+  <div v-if="errorMessage" class="alert alert-danger">{{ errorMessage }}</div>
+c  <div class="container d-flex justify-content-center align-items-center" style="height: 80vh;">
     <form class="p-3 card col-md-3" @submit.prevent="submitForm">
       <h1>Transaction</h1>
 
@@ -68,8 +69,13 @@ export default {
       };
 
       try {
-        await axios.post('/transactions/createWithIban', transaction);
+        await axios.post('/transactions/createWithIban', transaction, {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem('token')}`
+          }
+        });
         this.errorMessage = '';
+        this.$router.push('/transactionshome');
       } catch (error) {
         this.errorMessage = error.response.data.message || 'An error occurred while submitting the form.';
       }

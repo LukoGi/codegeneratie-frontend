@@ -21,6 +21,7 @@ import AllTransactions from '../components/Admin/TransactionsOverview.vue';
 import SetLimitsDashboard from '../components/Admin/SetLimitsDashboard.vue';
 import BankOverview from '../components/Admin/BankAccountOverview.vue';
 import AdminSideNav from "@/components/Admin/AdminSideNav.vue";
+import TransferFunds from "@/components/Admin/TransferFunds.vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -44,7 +45,8 @@ const router = createRouter({
     { path: '/admin/setlimitsdashboard', component: SetLimitsDashboard },
     { path: '/admin/setlimits/:user_id', component: SetLimits},
     { path: '/admin/bankoverview', component: BankOverview},
-    { path: '/admin', component: AdminSideNav}
+    { path: '/admin', component: AdminSideNav},
+    { path: '/admin/transferfunds', component: TransferFunds}
   ]
 })
 

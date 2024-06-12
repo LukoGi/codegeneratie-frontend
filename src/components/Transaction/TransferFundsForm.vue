@@ -1,4 +1,5 @@
 <template>
+  <div v-if="errorMessage" class="alert alert-danger">{{ errorMessage }}</div>
   <div class="container d-flex justify-content-center align-items-center" style="height: 80vh;">
     <form class="p-3 card col-md-3" @submit.prevent="submitForm">
       <h1>Transfer Funds</h1>
@@ -67,8 +68,13 @@ export default {
       };
 
       try {
-        await axios.post('/transactions/transfer', transaction);
+        await axios.post('/transactions/transfer', transaction, {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem('token')}`
+          }
+        });
         this.errorMessage = '';
+        this.$router.push('/transactionshome');
       } catch (error) {
         this.errorMessage = error.response.data.message || 'An error occurred while submitting the form.';
       }

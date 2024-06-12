@@ -90,7 +90,11 @@ export default {
       };
 
       try {
-        await axios.post('/transactions/employeeTransfer', transaction);
+        await axios.post('/transactions/employeeTransfer', transaction, {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem('token')}`
+          }
+        });
         this.errorMessage = '';
       } catch (error) {
         this.errorMessage = error.response.data.message || 'An error occurred while submitting the form.';

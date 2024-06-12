@@ -18,7 +18,7 @@
           <div class="col-md-4">
             <div class="card mb-4 shadow-sm">
               <div class="card-body">
-                <h5 class="card-title">Transfer Funds Between Accounts</h5>
+                <h5 class="card-title">Savings/Checkings Transfer</h5>
                 <router-link to="/transferfundsform" class="btn btn-primary">Go</router-link>
               </div>
             </div>
