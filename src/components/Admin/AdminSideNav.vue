@@ -13,7 +13,7 @@
 
     <h3>Transactions</h3>
     <router-link to="/admin/transactionoverview">Transaction overview</router-link>
-    <router-link to="/admin/transferfunds">Transfer funds</router-link>
+    <router-link to="/admin/employeecreatetransaction">Transfer funds</router-link>
 
   </div>
 </template>
