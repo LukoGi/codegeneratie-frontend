@@ -90,12 +90,16 @@ export default {
       };
 
       try {
-        await axios.post('/transactions/employeeTransfer', transaction, {
+        await axios.post('/transactions/employee', transaction, {
           headers: {
             Authorization: `Bearer ${localStorage.getItem('token')}`
           }
         });
         this.errorMessage = '';
+        this.fromAccountIban = '';
+        this.toAccountIban = '';
+        this.transferAmount = null;
+        this.description = '';
       } catch (error) {
         this.errorMessage = error.response.data.message || 'An error occurred while submitting the form.';
       }

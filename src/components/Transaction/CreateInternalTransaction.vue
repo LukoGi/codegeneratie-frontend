@@ -68,7 +68,7 @@ export default {
       };
 
       try {
-        await axios.post('/transactions/transfer', transaction, {
+        await axios.post('/transactions/customer/internal', transaction, {
           headers: {
             Authorization: `Bearer ${localStorage.getItem('token')}`
           }

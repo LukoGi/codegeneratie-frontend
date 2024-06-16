@@ -11,7 +11,7 @@
             <div class="card mb-4 shadow-sm">
               <div class="card-body">
                 <h5 class="card-title">Create New Transaction</h5>
-                <router-link to="/createtransactionsform" class="btn btn-primary">Go</router-link>
+                <router-link to="/customercreatetransaction" class="btn btn-primary">Go</router-link>
               </div>
             </div>
           </div>
@@ -19,7 +19,7 @@
             <div class="card mb-4 shadow-sm">
               <div class="card-body">
                 <h5 class="card-title">Savings/Checkings Transfer</h5>
-                <router-link to="/transferfundsform" class="btn btn-primary">Go</router-link>
+                <router-link to="/createinternaltransaction" class="btn btn-primary">Go</router-link>
               </div>
             </div>
           </div>

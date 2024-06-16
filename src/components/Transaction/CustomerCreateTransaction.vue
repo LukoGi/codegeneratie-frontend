@@ -5,22 +5,22 @@ c  <div class="container d-flex justify-content-center align-items-center" style
       <h1>Transaction</h1>
 
       <div class="form-group mb-3">
-        <label for="to_account_iban">To Account IBAN:</label>
+        <label for="toAccountIban">To Account IBAN:</label>
         <input
             type="text"
             class="form-control"
-            id="to_account_iban"
-            v-model="to_account_iban"
+            id="toAccountIban"
+            v-model="toAccountIban"
             required
         />
       </div>
       <div class="form-group mb-3">
-        <label for="transfer_amount">Transfer Amount:</label>
+        <label for="transferAmount">Transfer Amount:</label>
         <input
             type="number"
             class="form-control"
-            id="transfer_amount"
-            v-model="transfer_amount"
+            id="transferAmount"
+            v-model="transferAmount"
             step="0.01"
             required
         />
@@ -53,8 +53,8 @@ export default {
   },
   data() {
     return {
-      to_account_iban: '',
-      transfer_amount: null,
+      toAccountIban: '',
+      transferAmount: null,
       description: '',
       errorMessage: '',
     };
@@ -62,14 +62,14 @@ export default {
   methods: {
     async submitForm() {
       const transaction = {
-        to_account_iban: this.to_account_iban,
-        initiator_user_id: this.userStore.getUserId,
-        transfer_amount: this.transfer_amount,
+        toAccountIban: this.toAccountIban,
+        initiatorUserId: this.userStore.getUserId,
+        transferAmount: this.transferAmount,
         description: this.description,
       };
 
       try {
-        await axios.post('/transactions/createWithIban', transaction, {
+        await axios.post('/transactions/customer', transaction, {
           headers: {
             Authorization: `Bearer ${localStorage.getItem('token')}`
           }
