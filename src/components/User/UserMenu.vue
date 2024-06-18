@@ -28,9 +28,9 @@
     </div>
 
     <div v-if="accounts && accounts.length" class="mt-3">
-      <div v-for="account in accounts" :key="account.account_id" class="alert alert-info">
+      <div v-for="account in accounts" :key="account.accountId" class="alert alert-info">
         <p>Account Holder: {{ account.user.first_name }} {{ account.user.last_name }}</p>
-        <p>Account Type: {{ account.account_type }}</p>
+        <p>Account Type: {{ account.accountType }}</p>
         <p>IBAN: {{ account.iban }}</p>
       </div>
     </div>
@@ -47,9 +47,9 @@
               <div class="d-flex justify-content-between">
                 <div>IBAN: {{ account.iban }}</div>
                 <div class="balance">Balance: €{{ account.balance }}</div>
-                <div class="account_type"> Account type: {{account.account_type}}</div>
+                <div class="accountType"> Account type: {{account.accountType}}</div>
                 <div>
-                  <router-link :to="`/transactions/${account.account_id}`" class="btn btn-primary">View Transactions</router-link>
+                  <router-link :to="`/transactions/${account.accountId}`" class="btn btn-primary">View Transactions</router-link>
                 </div>
               </div>
             </li>
@@ -176,7 +176,7 @@
 .balance {
   margin-left: 120px;
 }
-.account_type {
+.accountType {
   margin-left: 120px;
 }
 </style>
