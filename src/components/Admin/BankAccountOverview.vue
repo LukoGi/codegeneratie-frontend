@@ -20,17 +20,17 @@
           </tr>
           </thead>
           <tbody>
-          <tr v-for="account in users" :key="account.account_id">
+          <tr v-for="account in users" :key="account.accountId">
             <td>{{ account.user.first_name }}</td>
             <td>{{ account.user.last_name }}</td>
             <td>{{ maskIban(account.iban) }}</td>
             <td>{{ formatCurrency(account.balance) }}</td>
-            <td>{{ account.is_active ? 'Active' : 'Not Active' }}</td>
+            <td>{{ account.isActive ? 'Active' : 'Not Active' }}</td>
             <td>
-              <router-link :to="`/admin/transactionoverview/${account.account_id}`" class="btn btn-primary">View Transactions</router-link>
+              <router-link :to="`/admin/transactionoverview/${account.accountId}`" class="btn btn-primary">View Transactions</router-link>
             </td>
             <td>
-              <button class="btn btn-primary" @click="closeAccount(account.account_id)">Close Account</button>
+              <button class="btn btn-primary" @click="closeAccount(account.accountId)">Close Account</button>
             </td>
           </tr>
           </tbody>
@@ -90,7 +90,7 @@ export default {
       })
           .then(response => {
             console.log(response.data);
-            this.users = this.users.filter(account => account.account_id !== accountId);
+            this.users = this.users.filter(account => account.accountId !== accountId);
           })
           .catch(error => {
             console.log(error);

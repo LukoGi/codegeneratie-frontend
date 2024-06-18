@@ -72,10 +72,10 @@ export default {
     selectedUser(newValue) {
       this.fetchBankAccounts();
       this.selectedBankAccount = "";
-      this.dailyTransferLimit = newValue.daily_transfer_limit;
+      this.dailyTransferLimit = newValue.dailyTransferLimit;
     },
     selectedBankAccount(newValue) {
-      this.absoluteLimit = newValue.absolute_limit;
+      this.absoluteLimit = newValue.absoluteLimit;
     },
   },
   methods: {
@@ -130,7 +130,7 @@ export default {
     async setAbsoluteLimit() {
       try {
         await axios.put(
-          `accounts/${this.selectedBankAccount.account_id}/setAbsoluteLimit?absoluteLimit=${this.absoluteLimit}`,
+          `accounts/${this.selectedBankAccount.accountId}/setAbsoluteLimit?absoluteLimit=${this.absoluteLimit}`,
           null,
           {
             headers: {
