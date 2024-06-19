@@ -57,7 +57,7 @@ export default {
                 is_archived: false,
                 is_approved: false,
                 roles: ['ROLE_USER'],
-                daily_transfer_limit: null,
+                dailyTransferLimit: null,
             },
             errorMessage: '',
         };

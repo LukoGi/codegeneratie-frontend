@@ -4,31 +4,31 @@ import axios from "../axios-auth";
 // I have decided against storing this in localStorage bc it doesnt seem to be the reasonable thing to do for an atm machine
 export const useAtmStore = defineStore("atmstore", {
   state: () => ({
-    account_id: null,
+    accountId: null,
     iban: null,
     balance: null,
-    account_type: null,
-    is_active: null,
-    absolute_limit: null,
+    accountType: null,
+    isActive: null,
+    absoluteLimit: null,
 
     user_id: null,
     first_name: null,
     last_name: null,
   }),
   getters: {
-    getAccount_id: (state) => state.account_id,
+    getaccountId: (state) => state.accountId,
     getIban: (state) => state.iban,
     getBalance: (state) => Number(state.balance).toFixed(2),
-    getAccount_type: (state) => state.account_type,
-    getIs_active: (state) => state.is_active,
-    getAbsolute_limit: (state) => state.absolute_limit,
+    getaccountType: (state) => state.accountType,
+    getisActive: (state) => state.isActive,
+    getabsoluteLimit: (state) => state.absoluteLimit,
 
     getUser_id: (state) => state.user_id,
     getFirst_name: (state) => state.first_name,
     getLast_name: (state) => state.last_name,
     getFullName: (state) => state.first_name + " " + state.last_name,
 
-    isLoggedIn: (state) => state.account_id !== null,
+    isLoggedIn: (state) => state.accountId !== null,
   },
   actions: {
     async login(fullname, iban, pincode) {
@@ -40,7 +40,7 @@ export const useAtmStore = defineStore("atmstore", {
             pincode: pincode,
           });
           const data = res.data;
-          this.account_id = data.account_id;
+          this.accountId = data.accountId;
           this.balance = data.balance;
           this.user_id = data.user.user_id;
           this.first_name = data.user.first_name;
@@ -57,12 +57,12 @@ export const useAtmStore = defineStore("atmstore", {
     },
 
     logout() {
-      this.account_id = null;
+      this.accountId = null;
       this.iban = null;
       this.balance = null;
-      this.account_type = null;
-      this.is_active = null;
-      this.absolute_limit = null;
+      this.accountType = null;
+      this.isActive = null;
+      this.absoluteLimit = null;
       this.user_id = null;
       this.first_name = null;
       this.last_name = null;
@@ -73,7 +73,7 @@ export const useAtmStore = defineStore("atmstore", {
     async withdraw(amount) {
       return new Promise(async (resolve, reject) => {
         try {
-          const res = await axios.post(`accounts/${this.account_id}/withdraw`, {
+          const res = await axios.post(`accounts/${this.accountId}/withdraw`, {
             amount: amount,
           });
           this.balance = res.data.balance;
@@ -87,7 +87,7 @@ export const useAtmStore = defineStore("atmstore", {
     async deposit(amount) {
       return new Promise(async (resolve, reject) => {
         try {
-          const res = await axios.post(`accounts/${this.account_id}/deposit`, {
+          const res = await axios.post(`accounts/${this.accountId}/deposit`, {
             amount: amount,
           });
           this.balance = res.data.balance;

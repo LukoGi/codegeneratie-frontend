@@ -7,12 +7,12 @@
 
       <div class="form-group mb-3">
         <label for="absolute">Absolute Limit:</label>
-        <input id="absolute" v-model="limits.absolute_transfer_limit" type="number" class="form-control" required>
+        <input id="absolute" v-model="limits.absoluteLimit" type="number" class="form-control" required>
       </div>
 
       <div class="form-group mb-3">
         <label for="daily">Daily Transfer Limit:</label>
-        <input id="daily" v-model="limits.daily_transfer_limit" type="number" class="form-control" required>
+        <input id="daily" v-model="limits.dailyTransferLimit" type="number" class="form-control" required>
       </div>
 
       <button class="btn btn-primary" type="submit">Set Limits</button>
@@ -29,8 +29,8 @@ export default {
       user_id: null,
       errorMessage: '',
       limits: {
-        absolute_transfer_limit: null,
-        daily_transfer_limit: null,
+        absoluteLimit: null,
+        dailyTransferLimit: null,
       },
     };
   },
@@ -39,18 +39,18 @@ export default {
   },
   methods: {
     setLimits() {
-      if (this.limits.daily_transfer_limit <= 0) {
+      if (this.limits.dailyTransferLimit <= 0) {
         this.errorMessage = 'Daily transfer Limit must be greater than zero';
         return;
       } 
-      if (this.limits.absolute_transfer_limit >= 0) {
+      if (this.limits.absoluteLimit >= 0) {
         this.errorMessage = 'Absolute Limit must be less or equal to zero';
         return;
       }
       const userUpdate = {
         user_id: this.user_id,
-        daily_transfer_limit: this.limits.daily_transfer_limit,
-        absolute_transfer_limit: this.limits.absolute_transfer_limit,
+        dailyTransferLimit: this.limits.dailyTransferLimit,
+        absoluteLimit: this.limits.absoluteLimit,
       };
 
       axios.put('/users/acceptUser/' + this.user_id, userUpdate, {
