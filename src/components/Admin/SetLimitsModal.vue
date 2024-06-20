@@ -18,7 +18,7 @@
             :key="account"
             :value="account"
           >
-            {{ account.iban }}
+            {{ account.iban }} - {{ account.accountType }}
           </option>
         </select>
       </div>
