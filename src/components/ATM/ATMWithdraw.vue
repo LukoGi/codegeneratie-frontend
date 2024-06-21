@@ -8,24 +8,30 @@
         active-class="active"
         >< Go Back</router-link
       >
-      <button class="btn btn-secondary btn-lg" @click="logout">Eject card</button>
+      <button class="btn btn-secondary btn-lg" @click="logout">
+        Eject card
+      </button>
     </div>
     <div class="text-center mt-5">
       <h1>ATM Withdraw</h1>
       <h3 class="mt-5">Your current balance is</h3>
-      <h3 class="fw-bold"> € {{ atmStore.getBalance }} </h3>
+      <h3 class="fw-bold">€ {{ atmStore.getBalance }}</h3>
     </div>
     <div class="d-flex flex-column align-items-center mt-5">
-        <input
-          min="1"
-          type="number"
-          class="form-control m-1"
-          style="width: 40%"
-          placeholder="Enter amount to withdraw"
-          v-model="amount"
-          @input="correctInput"
-        />
-      <button class="btn btn-primary btn-lg m-1" style="width: 40%" @click="withdraw">
+      <input
+        min="1"
+        type="number"
+        class="form-control m-1"
+        style="width: 40%"
+        placeholder="Enter amount to withdraw"
+        v-model="amount"
+        @input="correctInput"
+      />
+      <button
+        class="btn btn-primary btn-lg m-1"
+        style="width: 40%"
+        @click="withdraw"
+      >
         Withdraw
       </button>
       <p class="text-danger" id="warningText"></p>
@@ -34,17 +40,17 @@
 </template>
 
 <script>
-import { useAtmStore } from '@/stores/atmstore'; 
-import router from '@/router';
+import { useAtmStore } from "@/stores/atmstore";
+import router from "@/router";
 
 export default {
-  name: 'ATMWithdraw',
+  name: "ATMWithdraw",
   setup() {
     const atmStore = useAtmStore();
     const $router = router;
 
     if (!atmStore.isLoggedIn) {
-      $router.push('/atm/login');
+      $router.push("/atm/login");
     }
 
     return { atmStore };
@@ -57,17 +63,18 @@ export default {
   methods: {
     logout() {
       this.atmStore.logout();
-      this.$router.push('/atm/login');
+      this.$router.push("/atm/login");
     },
-    withdraw() {
-      if (this.validateInput()) {
-        this.atmStore.withdraw(this.amount)
-          .catch((error) => {
-            document.getElementById('warningText').innerHTML = error.response.data.message;
-          });
-        
+    async withdraw() {
+    if (this.validateInput()) {
+      try {
+        await this.atmStore.withdraw(this.amount);
+        document.getElementById("warningText").innerHTML = "";
+      } catch (error) {
+        document.getElementById("warningText").innerHTML = error.response.data.message;
       }
-    },
+    }
+  },
     correctInput() {
       if (this.amount < 1) {
         this.amount = null;
@@ -77,7 +84,8 @@ export default {
       if (this.amount > 0) {
         return true;
       } else {
-        document.getElementById('warningText').innerHTML = 'Please enter a valid amount';
+        document.getElementById("warningText").innerHTML =
+          "Please enter a valid amount";
         return false;
       }
     },

@@ -41,7 +41,7 @@
           class="form-control"
           v-model="absoluteLimit"
           placeholder="Absolute Limit"
-          :disabled="!selectedBankAccount"
+          :disabled="!selectedBankAccount || selectedBankAccount.accountType === 'SAVINGS'"
         />
       </div>
       <div v-if="errorMessage" class="alert alert-danger">{{ errorMessage }}</div>
@@ -102,7 +102,7 @@ export default {
       if (this.dailyTransferLimit !== "") {
         await this.setDailyLimit();
       } 
-      if (this.absoluteLimit !== "") {
+      if (this.absoluteLimit !== "" || this.absoluteLimit === 0) {
         await this.setAbsoluteLimit();
       } 
       
