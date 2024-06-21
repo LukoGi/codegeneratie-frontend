@@ -59,12 +59,14 @@ export default {
       this.atmStore.logout();
       this.$router.push('/atm/login');
     },
-    deposit() {
+    async deposit() {
       if (this.validateInput()) {
-        this.atmStore.deposit(this.amount)
-          .catch((error) => {
-            document.getElementById('warningText').innerHTML = error.response.data.message;
-          });
+        try {
+          await this.atmStore.deposit(this.amount);
+          document.getElementById('warningText').innerHTML = '';
+        } catch (error) {
+          document.getElementById('warningText').innerHTML = error.response.data.message;
+        }
       }
     },
     correctInput() {
