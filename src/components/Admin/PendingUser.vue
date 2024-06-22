@@ -45,7 +45,7 @@ export default {
   },
   methods: {
     getUsers() {
-      axios.get('/users/getUnapprovedUsers', {
+      axios.get('/users/unapprovedUsers', {
         headers: {
           Authorization: `Bearer ${localStorage.getItem('token')}`
         }

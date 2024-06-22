@@ -6,7 +6,6 @@
     <br>
 
     <h3>Bank Accounts</h3>
-    <router-link to="/admin/bankaccountcreation">Create Bank accounts</router-link>
     <router-link to="/admin/setlimitsdashboard">Set Limits</router-link>
     <router-link to="/admin/bankoverview">Bank account overview</router-link>
     <br>

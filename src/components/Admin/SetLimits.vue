@@ -53,7 +53,7 @@ export default {
         absoluteLimit: this.limits.absoluteLimit,
       };
 
-      axios.put('/users/acceptUser/' + this.user_id, userUpdate, {
+      axios.put('/users/approve/' + this.user_id, userUpdate, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem('token')}`
         }
@@ -71,5 +71,4 @@ export default {
 </script>
 
 <style scoped>
-/* Your CSS goes here */
 </style>
