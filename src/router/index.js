@@ -50,7 +50,7 @@ const router = createRouter({
     },
     { path: "/admin/transactionoverview", component: AllTransactions },
     { path: "/admin/setlimitsdashboard", component: SetLimitsDashboard },
-    { path: "/admin/setlimits/:user_id", component: SetLimits },
+    { path: "/admin/setlimits/:userId", component: SetLimits },
     { path: "/admin/bankoverview", component: BankOverview },
     { path: "/admin", component: AdminSideNav },
     {

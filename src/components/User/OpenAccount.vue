@@ -15,24 +15,24 @@
           <input id="password" v-model="user.password" type="password" class="form-control" required>
         </div>
         <div class="form-group mb-3">
-          <label for="first_name">First Name:</label>
-          <input id="first_name" v-model="user.first_name" type="text" class="form-control" required>
+          <label for="firstName">First Name:</label>
+          <input id="firstName" v-model="user.firstName" type="text" class="form-control" required>
         </div>
         <div class="form-group mb-3">
-          <label for="last_name">Last Name:</label>
-          <input id="last_name" v-model="user.last_name" type="text" class="form-control" required>
+          <label for="lastName">Last Name:</label>
+          <input id="lastName" v-model="user.lastName" type="text" class="form-control" required>
         </div>
         <div class="form-group mb-3">
           <label for="email">Email:</label>
           <input id="email" v-model="user.email" type="email" class="form-control" required>
         </div>
         <div class="form-group mb-3">
-          <label for="phone_number">Phone Number:</label>
-          <input id="phone_number" v-model="user.phone_number" type="text" class="form-control" required>
+          <label for="phoneNumber">Phone Number:</label>
+          <input id="phoneNumber" v-model="user.phoneNumber" type="text" class="form-control" required>
         </div>
         <div class="form-group mb-3">
-          <label for="bsn_number">BSN Number:</label>
-          <input id="bsn_number" v-model="user.bsn_number" type="text" class="form-control" required>
+          <label for="bsnNumber">BSN Number:</label>
+          <input id="bsnNumber" v-model="user.bsnNumber" type="text" class="form-control" required>
         </div>
         <button class="btn btn-primary" type="submit">Open Account</button>
       </form>
@@ -49,13 +49,13 @@ export default {
             user: {
                 username: '',
                 password: '',
-                first_name: '',
-                last_name: '',
+                firstName: '',
+                lastName: '',
                 email: '',
-                phone_number: '',
-                bsn_number: '',
+                phoneNumber: '',
+                bsnNumber: '',
                 is_archived: false,
-                is_approved: false,
+                isApproved: false,
                 roles: ['ROLE_USER'],
                 dailyTransferLimit: null,
             },
@@ -64,11 +64,11 @@ export default {
     },
     methods: {
         submitForm() {
-            if (!this.validatePhoneNumber(this.user.phone_number)) {
+            if (!this.validatePhoneNumber(this.user.phoneNumber)) {
               this.errorMessage = 'Invalid phone number';
              return;
             }
-            if(this.user.bsn_number.length !== 9) {
+            if(this.user.bsnNumber.length !== 9) {
               this.errorMessage = 'Invalid BSN number';
               return;
             }

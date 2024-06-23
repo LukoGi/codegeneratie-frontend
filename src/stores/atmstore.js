@@ -11,40 +11,40 @@ export const useAtmStore = defineStore("atmstore", {
     isActive: null,
     absoluteLimit: null,
 
-    user_id: null,
-    first_name: null,
-    last_name: null,
+    userId: null,
+    firstName: null,
+    lastName: null,
   }),
   getters: {
-    getaccountId: (state) => state.accountId,
+    phoneNumber: (state) => state.accountId,
     getIban: (state) => state.iban,
     getBalance: (state) => Number(state.balance).toFixed(2),
-    getaccountType: (state) => state.accountType,
-    getisActive: (state) => state.isActive,
-    getabsoluteLimit: (state) => state.absoluteLimit,
+    getAccountType: (state) => state.accountType,
+    getIsActive: (state) => state.isActive,
+    getAbsoluteLimit: (state) => state.absoluteLimit,
 
-    getUser_id: (state) => state.user_id,
-    getFirst_name: (state) => state.first_name,
-    getLast_name: (state) => state.last_name,
-    getFullName: (state) => state.first_name + " " + state.last_name,
+    getUserId: (state) => state.userId,
+    getFirstName: (state) => state.firstName,
+    getLastName: (state) => state.lastName,
+    getfullName: (state) => state.firstName + " " + state.lastName,
 
     isLoggedIn: (state) => state.accountId !== null,
   },
   actions: {
-    async login(fullname, iban, pincode) {
+    async login(fullName, iban, pinCode) {
       return new Promise(async (resolve, reject) => {
         try {
           const res = await axios.post("accounts/login", {
-            fullname: fullname,
+            fullName: fullName,
             iban: iban,
-            pincode: pincode,
+            pinCode: pinCode,
           });
           const data = res.data;
           this.accountId = data.accountId;
           this.balance = data.balance;
-          this.user_id = data.user.user_id;
-          this.first_name = data.user.first_name;
-          this.last_name = data.user.last_name;
+          this.userId = data.user.userId;
+          this.firstName = data.user.firstName;
+          this.lastName = data.user.lastName;
 
           axios.defaults.headers.common["Authorization"] =
             "Bearer " + res.data.token;
@@ -63,9 +63,9 @@ export const useAtmStore = defineStore("atmstore", {
       this.accountType = null;
       this.isActive = null;
       this.absoluteLimit = null;
-      this.user_id = null;
-      this.first_name = null;
-      this.last_name = null;
+      this.userId = null;
+      this.firstName = null;
+      this.lastName = null;
 
       axios.defaults.headers.common["Authorization"] = null;
     },

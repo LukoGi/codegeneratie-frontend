@@ -51,11 +51,11 @@
           <tr v-for="transaction in transactions" :key="transaction.id">
             <td>{{ transaction.date }}</td>
             <td>{{ transaction.description }}</td>
-            <td>{{ transaction.initiator_user.username }}</td>
-            <td>{{ transaction.initiator_user.first_name }} {{ transaction.initiator_user.last_name }}</td>
-            <td>{{ transaction.to_account.user.first_name }} {{ transaction.to_account.user.last_name }}</td>
-            <td>{{ transaction.to_account.iban }}</td>
-            <td>{{ transaction.transfer_amount }}</td>
+            <td>{{ transaction.initiatorUser.username }}</td>
+            <td>{{ transaction.initiatorUser.firstName }} {{ transaction.initiatorUser.lastName }}</td>
+            <td>{{ transaction.toAccount.user.firstName }} {{ transaction.toAccount.user.lastName }}</td>
+            <td>{{ transaction.toAccount.iban }}</td>
+            <td>{{ transaction.transferAmount }}</td>
           </tr>
           </tbody>
         </table>

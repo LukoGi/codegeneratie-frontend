@@ -54,7 +54,7 @@ export default {
         localStorage.setItem('token', response.data.token);
 
         const userStore = useUserStore();
-        userStore.setUserId(response.data.user_id);
+        userStore.setUserId(response.data.userId);
         userStore.setRoles(response.data.roles);
         userStore.setUsername(response.data.username);
         console.log("User ID set in store:", userStore.getUserId);
@@ -75,7 +75,7 @@ export default {
         }
       })
       .then(response => {
-        localStorage.setItem('is_approved', response.data.is_approved);
+        localStorage.setItem('isApproved', response.data.isApproved);
         localStorage.setItem('roles', JSON.stringify(response.data.roles));
         localStorage.setItem('username', response.data.username);
         if(response.data.roles.includes('ROLE_ADMIN')) {

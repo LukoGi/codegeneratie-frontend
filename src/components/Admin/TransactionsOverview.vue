@@ -49,10 +49,10 @@
         <tr v-for="transaction in transactions" :key="transaction.id">
           <td>{{ transaction.date }}</td>
           <td>{{ transaction.description }}</td>
-          <td>{{ transaction.initiator_user.first_name }} {{ transaction.initiator_user.last_name }}</td>
-          <td>{{ transaction.to_account.user.first_name }} {{ transaction.to_account.user.last_name }}</td>
-          <td>{{ maskIban(transaction.to_account.iban) }}</td>
-          <td>{{ amountFormatter(transaction.transfer_amount) }}</td>
+          <td>{{ transaction.initiatorUser.firstName }} {{ transaction.initiatorUser.lastName }}</td>
+          <td>{{ transaction.toAccount.user.firstName }} {{ transaction.toAccount.user.lastName }}</td>
+          <td>{{ maskIban(transaction.toAccount.iban) }}</td>
+          <td>{{ transaction.transferAmount }} </td>
         </tr>
         </tbody>
       </table>
@@ -86,22 +86,15 @@ export default {
     maskIban(iban) {
       return iban.slice(-4).padStart(iban.length, '*');
     },
-    amountFormatter(amount) {
-      return new Intl.NumberFormat('en-US', {
-        style: 'currency',
-        currency: 'EUR',
-      }).format(amount);
-    },
 
     formatTransactions(transactions) {
       transactions.forEach(transaction => {
         const date = new Date(transaction.date);
-        const formattedDate = date.toLocaleDateString('en-US', {
+        transaction.date = date.toLocaleDateString('en-US', {
           year: 'numeric',
           month: 'long',
           day: 'numeric'
         });
-        transaction.date = formattedDate;
         transaction.transferAmount = (transaction.transferAmount * 1.1).toLocaleString('en-US', {
           style: 'currency',
           currency: 'EUR',
@@ -129,7 +122,7 @@ export default {
           },
         });
         console.log('Response:', response);
-        this.transactions = this.formatTransactions(response.data); // Changed from response.data.content to response.data
+        this.transactions = this.formatTransactions(response.data);
       } catch (error) {
         console.error('Error:', error);
       }

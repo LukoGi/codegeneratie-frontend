@@ -3,7 +3,7 @@
     <div class="d-flex justify-content-end"><button class="btn btn-secondary btn-lg" @click="logout">Eject card</button></div>
     <div class="text-center mt-5">
       <h1>Welcome</h1>
-      <h1 class="fw-bold">{{ atmStore.getFullName }}</h1>
+      <h1 class="fw-bold">{{ atmStore.getfullName }}</h1>
       <h3 class="mt-5">Your current balance is</h3> 
       <h3 class="fw-bold"> € {{ atmStore.getBalance }} </h3>
     </div>

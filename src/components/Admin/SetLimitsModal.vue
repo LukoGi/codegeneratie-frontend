@@ -86,7 +86,7 @@ export default {
     async fetchBankAccounts() {
       try {
         const response = await axios.get(
-          `accounts/user/${this.selectedUser.user_id}`,
+          `accounts/user/${this.selectedUser.userId}`,
           {
             headers: {
               Authorization: `Bearer ${this.token}`,
@@ -110,7 +110,7 @@ export default {
     async setDailyLimit() {
       try {
         await axios.put(
-          `users/${this.selectedUser.user_id}/setDailyLimit?dailyLimit=${this.dailyTransferLimit}`,
+          `users/${this.selectedUser.userId}/setDailyLimit?dailyLimit=${this.dailyTransferLimit}`,
           null,
           {
             headers: {

@@ -21,8 +21,8 @@
           </thead>
           <tbody>
           <tr v-for="account in users" :key="account.accountId">
-            <td>{{ account.user.first_name }}</td>
-            <td>{{ account.user.last_name }}</td>
+            <td>{{ account.user.firstName }}</td>
+            <td>{{ account.user.lastName }}</td>
             <td>{{ maskIban(account.iban) }}</td>
             <td>{{ formatCurrency(account.balance) }}</td>
             <td>{{ account.isActive ? 'Active' : 'Not Active' }}</td>

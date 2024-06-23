@@ -36,13 +36,13 @@ export default {
   data() {
     return {
       isLoggedIn: !!localStorage.getItem('token'),
-      isApproved: localStorage.getItem('is_approved') === 'true',
+      isApproved: localStorage.getItem('isApproved') === 'true',
     };
   },
   methods: {
     logout() {
       localStorage.removeItem('token');
-      localStorage.removeItem('is_approved');
+      localStorage.removeItem('isApproved');
       this.isLoggedIn = false;
       this.isApproved = true;
       router.push({ path: '/login' });
@@ -50,12 +50,12 @@ export default {
   },
   created() {
     this.isLoggedIn = !!localStorage.getItem('token');
-    this.isApproved = localStorage.getItem('is_approved') === 'true';
+    this.isApproved = localStorage.getItem('isApproved') === 'true';
   },
   watch: {
     '$route': function() {
       this.isLoggedIn = !!localStorage.getItem('token');
-      this.isApproved = localStorage.getItem('is_approved') === 'true';
+      this.isApproved = localStorage.getItem('isApproved') === 'true';
     }
   }
 }

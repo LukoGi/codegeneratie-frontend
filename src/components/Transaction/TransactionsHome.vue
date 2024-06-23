@@ -23,6 +23,15 @@
               </div>
             </div>
           </div>
+          <div class="col-md-4">
+            <div class="card mb-4 shadow-sm">
+              <div class="card-body">
+                <h5 class="card-title">View Your Transactions</h5>
+                <!-- Doe dit nog ff clean -JJ  -->
+                <router-link to="/transactions/idk" class="btn btn-primary">Go</router-link>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </section>

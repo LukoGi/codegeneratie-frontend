@@ -8,12 +8,12 @@
       <form class="p-3 card col-md-3" @submit.prevent="login">
         <h1>Insert Card</h1>
         <div class="form-group mb-3">
-          <label for="fullname">Name on Card</label>
+          <label for="fullName">Name on Card</label>
           <input
             type="text"
             class="form-control"
-            id="fullname"
-            v-model="fullname"
+            id="fullName"
+            v-model="fullName"
             required
           />
           <small class="text-muted">Full name as displayed on card</small>
@@ -51,7 +51,7 @@ export default {
   name: "ATMLogin",
   data() {
     return {
-      fullname: "",
+      fullName: "",
       iban: "",
       pin: "",
       errorMessage: "",
@@ -65,7 +65,7 @@ export default {
   methods: {
     async login() {
       try {
-        await this.atmStore.login(this.fullname, this.iban, this.pin)
+        await this.atmStore.login(this.fullName, this.iban, this.pin)
         this.$router.push("/atm/main-menu");
       } catch (error) {
         this.errorMessage = error.response.data.message;
