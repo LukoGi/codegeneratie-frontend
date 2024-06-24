@@ -33,8 +33,8 @@
                 <div>IBAN: {{ account.iban }}</div>
                 <div class="balance">Balance: €{{ account.balance }}</div>
                 <div class="accountType"> Account type: {{account.accountType}}</div>
-                <div>
-                  <router-link :to="`/transactions/${account.accountId}`" class="btn btn-primary">View Transactions</router-link>
+                <div class="col-3">
+                  <router-link :to="`/transactions/${account.accountId}`" class="btn btn-primary margin">View Transactions</router-link>
                 </div>
               </div>
             </li>
@@ -123,6 +123,10 @@
 }
 .accountType {
   margin-left: 120px;
+}
+
+.margin {
+  margin-left: 10px;
 }
 </style>
 

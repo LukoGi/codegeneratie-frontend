@@ -54,7 +54,7 @@ export default {
                 email: '',
                 phoneNumber: '',
                 bsnNumber: '',
-                is_archived: false,
+                isArchived: false,
                 isApproved: false,
                 roles: ['ROLE_USER'],
                 dailyTransferLimit: null,
