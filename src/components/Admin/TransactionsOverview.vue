@@ -121,7 +121,6 @@ export default {
             Authorization: `Bearer ${this.token}`,
           },
         });
-        console.log('Response:', response);
         this.transactions = this.formatTransactions(response.data);
       } catch (error) {
         console.error('Error:', error);

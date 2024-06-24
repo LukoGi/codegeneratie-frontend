@@ -76,10 +76,8 @@ export default {
       })
           .then(response => {
             this.users = response.data.users || response.data;
-            console.log (response)
           })
           .catch(error => {
-            console.log(error);
           });
     },
     closeAccount(accountId) {
