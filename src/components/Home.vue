@@ -81,7 +81,7 @@
 export default {
   computed: {
     isApproved() {
-      return localStorage.getItem('is_approved') === 'false';
+      return localStorage.getItem('isApproved') === 'false';
     }
   }
 }

@@ -21,8 +21,8 @@
           </thead>
           <tbody>
           <tr v-for="account in users" :key="account.accountId">
-            <td>{{ account.user.first_name }}</td>
-            <td>{{ account.user.last_name }}</td>
+            <td>{{ account.user.firstName }}</td>
+            <td>{{ account.user.lastName }}</td>
             <td>{{ maskIban(account.iban) }}</td>
             <td>{{ formatCurrency(account.balance) }}</td>
             <td>{{ account.isActive ? 'Active' : 'Not Active' }}</td>
@@ -76,10 +76,8 @@ export default {
       })
           .then(response => {
             this.users = response.data.users || response.data;
-            console.log (response)
           })
           .catch(error => {
-            console.log(error);
           });
     },
     closeAccount(accountId) {

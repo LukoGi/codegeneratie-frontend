@@ -2,12 +2,12 @@ import { defineStore } from 'pinia';
 
 export const useUserStore = defineStore('userstore', {
     state: () => ({
-        user_id: null,
+        userId: null,
         roles: [],
         username: null,
     }),
     getters: {
-        getUserId: (state) => state.user_id,
+        getUserId: (state) => state.userId,
         getUsername: (state) => {
             console.log('Getting username:', state.username)
             return state.username
@@ -15,11 +15,11 @@ export const useUserStore = defineStore('userstore', {
         getRoles: (state) => {
             return state.roles;
         },
-        isLoggedIn: (state) => state.user_id !== null,
+        isLoggedIn: (state) => state.userId !== null,
     },
     actions: {
-        setUserId(user_id) {
-            this.user_id = user_id;
+        setUserId(userId) {
+            this.userId = userId;
         },
         setUsername(username) {
             this.username = username;
@@ -28,7 +28,7 @@ export const useUserStore = defineStore('userstore', {
             this.roles = roles;
         },
         logout() {
-            this.user_id = null;
+            this.userId = null;
             this.roles = [];
         },
     },

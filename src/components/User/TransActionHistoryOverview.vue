@@ -47,8 +47,8 @@
       <tbody>
       <tr v-for="transaction in transactions" :key="transaction.date">
         <td>{{ formatDate(transaction.date) }}</td>
-        <td>{{ transaction.to_account.user.username }}</td>
-        <td>{{ transaction.initiator_user.username === userStore.getUsername ? '- ' : '+ ' }}{{ formatCurrency(transaction.transfer_amount) }}</td>
+        <td>{{ transaction.toAccount.user.username }}</td>
+        <td>{{ transaction.initiatorUser.username === userStore.getUsername ? '- ' : '+ ' }}{{ formatCurrency(transaction.transferAmount) }}</td>
       </tr>
       </tbody>
     </table>

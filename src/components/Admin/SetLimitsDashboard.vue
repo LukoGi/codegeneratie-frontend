@@ -15,10 +15,10 @@
       </thead>
       <tbody>
         <tr v-for="user in users" :key="user.id">
-          <td>{{ user.user_id }}</td>
+          <td>{{ user.userId }}</td>
           <td>{{ user.username }}</td>
-          <td>{{ user.first_name }}</td>
-          <td>{{ user.last_name }}</td>
+          <td>{{ user.firstName }}</td>
+          <td>{{ user.lastName }}</td>
           <td>
             <button class="btn btn-primary" @click="showModal(user)">
               Set Limits

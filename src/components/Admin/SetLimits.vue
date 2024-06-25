@@ -26,7 +26,7 @@ import axios from "../../axios-auth";
 export default {
   data() {
     return {
-      user_id: null,
+      userId: null,
       errorMessage: '',
       limits: {
         absoluteLimit: null,
@@ -35,7 +35,7 @@ export default {
     };
   },
   created() {
-    this.user_id = this.$route.params.user_id;
+    this.userId = this.$route.params.userId;
   },
   methods: {
     setLimits() {
@@ -48,12 +48,12 @@ export default {
         return;
       }
       const userUpdate = {
-        user_id: this.user_id,
+        userId: this.userId,
         dailyTransferLimit: this.limits.dailyTransferLimit,
         absoluteLimit: this.limits.absoluteLimit,
       };
 
-      axios.put('/users/approve/' + this.user_id, userUpdate, {
+      axios.put('/users/approve/' + this.userId, userUpdate, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem('token')}`
         }
