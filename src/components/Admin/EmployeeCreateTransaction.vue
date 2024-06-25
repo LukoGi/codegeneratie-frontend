@@ -84,7 +84,7 @@ export default {
       const transaction = {
         fromAccountIban: this.fromAccountIban,
         toAccountIban: this.toAccountIban,
-        employeeId: this.userStore.getUserId,
+        initiatorUserId: this.userStore.getUserId,
         transferAmount: this.transferAmount,
         description: this.description,
       };

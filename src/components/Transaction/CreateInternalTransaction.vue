@@ -61,7 +61,7 @@ export default {
   methods: {
     async submitForm() {
       const transaction = {
-        userId: this.userStore.getUserId,
+        initiatorUserId: this.userStore.getUserId,
         fromAccountType: this.fromAccountType,
         toAccountType: this.toAccountType,
         transferAmount: this.transferAmount,
