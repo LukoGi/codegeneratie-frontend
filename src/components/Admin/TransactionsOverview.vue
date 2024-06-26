@@ -60,7 +60,7 @@ export default {
           month: 'long',
           day: 'numeric'
         });
-        transaction.transferAmount = (transaction.transferAmount * 1.1).toLocaleString('en-US', {
+        transaction.transferAmount = (transaction.transferAmount).toLocaleString('en-US', {
           style: 'currency',
           currency: 'EUR',
         });
